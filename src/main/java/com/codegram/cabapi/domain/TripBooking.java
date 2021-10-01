@@ -1,6 +1,7 @@
 package com.codegram.cabapi.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,16 +28,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class TripBooking {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tripBookingId;
-	@ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "customerId", referencedColumnName = "customerId")
-	private Customer customer;
-	@ManyToOne(targetEntity = Driver.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "driverId", referencedColumnName = "driverId")
-	private Driver driver;
+
+//	@ManyToOne(targetEntity = Customer.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+//	@JoinColumn(name = "customerId", referencedColumnName = "customerId")
+//	private Customer customer;
+//	@ManyToOne(targetEntity = Driver.class, fetch = FetchType.EAGER)
+//	@JoinColumn(name = "driverId", referencedColumnName = "driverId")
+//	private Driver driver;
+	@NotBlank(message="From Location is required")
 	private String fromLocation;
+	@NotBlank(message="From Location is required")
 	private String toLocation;
+	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
 	private LocalDateTime fromDateTime;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
@@ -45,20 +53,20 @@ public class TripBooking {
 		super();
 	}
 	
-	public TripBooking(int tripBookingId, Customer customer, Driver driver, String fromLocation, String toLocation,
-			LocalDateTime fromDateTime, LocalDateTime toDateTime, boolean status, float distanceInKm, float bill) {
-		super();
-		this.tripBookingId = tripBookingId;
-		this.customer = customer;
-		this.driver = driver;
-		this.fromLocation = fromLocation;
-		this.toLocation = toLocation;
-		this.fromDateTime = fromDateTime;
-		this.toDateTime = toDateTime;
-		this.status = status;
-		this.distanceInKm = distanceInKm;
-		this.bill = bill;
-	}
+//	public TripBooking(int tripBookingId, Customer customer, Driver driver, String fromLocation, String toLocation,
+//			LocalDateTime fromDateTime, LocalDateTime toDateTime, boolean status, float distanceInKm, float bill) {
+//		super();
+//		this.tripBookingId = tripBookingId;
+//		this.customer = customer;
+//		this.driver = driver;
+//		this.fromLocation = fromLocation;
+//		this.toLocation = toLocation;
+//		this.fromDateTime = fromDateTime;
+//		this.toDateTime = toDateTime;
+//		this.status = status;
+//		this.distanceInKm = distanceInKm;
+//		this.bill = bill;
+//	}
 
 	public int getTripBookingId() {
 		return tripBookingId;
@@ -66,18 +74,18 @@ public class TripBooking {
 	public void setTripBookingId(int tripBookingId) {
 		this.tripBookingId = tripBookingId;
 	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public Driver getDriver() {
-		return driver;
-	}
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
+//	public Driver getDriver() {
+//		return driver;
+//	}
+//	public void setDriver(Driver driver) {
+//		this.driver = driver;
+//	}
 	public String getFromLocation() {
 		return fromLocation;
 	}

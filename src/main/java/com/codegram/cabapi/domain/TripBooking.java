@@ -15,6 +15,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+
+
+
+/**
+ * entity for trip booking
+ * @author Arnav 
+ *
+ */
 @Entity
 public class TripBooking {
 	@Id

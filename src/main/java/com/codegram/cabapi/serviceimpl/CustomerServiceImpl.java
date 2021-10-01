@@ -16,19 +16,14 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer registerCustomer(Customer customer) {
-		try {
-			if(customer.getCustomerId()==0) {
-				customerRepository.save(customer);
-			}
+		
 			return customerRepository.save(customer);
-		}catch(Exception e) {
-			throw new CustomerIDException("Customer with id"+customer.getCustomerId()+"not found");
-		}
 		
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
+		
 		Customer updateCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
 		
 		updateCustomer.setEmail(customer.getEmail());
@@ -36,6 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
 		updateCustomer.setMobileNumber(customer.getMobileNumber());
 		updateCustomer.setPassword(customer.getPassword());
 		updateCustomer.setUsername(customer.getUsername());
+		customerRepository.save(updateCustomer);
 		
 		return updateCustomer;
 	}

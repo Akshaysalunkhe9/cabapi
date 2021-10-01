@@ -7,6 +7,7 @@ import com.codegram.cabapi.domain.Cab;
 
 public interface CabService {
 
+		public Cab saveOrUpdate(Cab cab);
 		public Cab insertCab(Cab cab);
 		public Cab updateCab(Cab cab);
 		public Cab deleteCab(Cab cab);

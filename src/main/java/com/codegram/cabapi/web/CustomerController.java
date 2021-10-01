@@ -31,7 +31,7 @@ public class CustomerController {
 	public ResponseEntity<?> registerNewCustomer(@Valid @RequestBody Customer customer , BindingResult result){
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		Customer registerCustomer = customerService.saveOrUpdate(customer);
+		Customer registerCustomer = customerService.registerCustomer(customer);
 		return new ResponseEntity<Customer>(customer,HttpStatus.CREATED);
 		
 	}

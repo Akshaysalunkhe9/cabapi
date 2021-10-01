@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * @author Animesh
  *
  */
-public class Driver {
+public class Driver{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

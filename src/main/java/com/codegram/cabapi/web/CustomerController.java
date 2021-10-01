@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,14 @@ public class CustomerController {
 		Customer registerCustomer = customerService.registerCustomer(customer);
 		return new ResponseEntity<Customer>(customer,HttpStatus.CREATED);
 		
+	}
+	
+	@PatchMapping("/{customerId}")
+	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Customer customer , BindingResult result){
+		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
+		if(errorMap!=null) return errorMap;
+		Customer updateCustomer = customerService.updateCustomer(customer);
+		return new ResponseEntity<Customer>(updateCustomer,HttpStatus.OK);
 	}
 	
 	

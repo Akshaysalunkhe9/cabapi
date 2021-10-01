@@ -36,5 +36,20 @@ public class CustomerServiceImpl implements CustomerService {
 		return updateCustomer;
 	}
 
+	@Override
+	public Customer viewCustomerDetails(Long customerId) {
+		// TODO Auto-generated method stub
+		Customer viewCustomer = customerRepository.findByCustomerId(customerId);	
+		return viewCustomer;
+	}
+
+	@Override
+	public Customer deleteCustomer(Long customerId) {
+		Customer customer=viewCustomerDetails(customerId);
+		customerRepository.delete(customer);
+		return customer;
+		
+	}
+
 	
 }

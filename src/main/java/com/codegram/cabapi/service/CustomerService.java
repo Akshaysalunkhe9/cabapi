@@ -13,5 +13,8 @@ public interface CustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 	
+	public Customer viewCustomerDetails(Long customerId);
+	
+	public Customer deleteCustomer(Long customerId);
 	
 }

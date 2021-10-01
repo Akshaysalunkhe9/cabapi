@@ -9,4 +9,5 @@ import com.codegram.cabapi.domain.Cab;
 public interface CabRepository extends CrudRepository<Cab, Long> {
 
 }
-/*sasds kguyft*/
+
+/*ugfifyug9*/

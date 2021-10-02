@@ -12,9 +12,11 @@ public interface DriverService {
 	 */
 	public Driver saveOrUpdate(Driver driver);
 	
-	public Driver findDriverByDriverIdentifier(String driverId);
-
 	public List<Driver> viewBestDrivers();
-
-	public Driver deleteDriver(String driverId);
+	
+    public Driver viewDriverDetails(long driverId);
+	
+	public Driver deleteDriver(long driverId);
+	
+	
 }

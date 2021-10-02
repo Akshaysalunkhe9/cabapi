@@ -50,13 +50,13 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public ResponseEntity<?> viewDriverById(@PathVariable Long customerId){
+	public ResponseEntity<?> viewDriverById(@PathVariable Integer customerId){
 		Customer customer=customerService.viewCustomerDetails(customerId);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{customerId}")
-	public ResponseEntity<?> deleteDriverById(@PathVariable Long customerId){
+	public ResponseEntity<?> deleteDriverById(@PathVariable Integer customerId){
 		customerService.deleteCustomer(customerId);
 		return new ResponseEntity<String>("Customer with id '"+customerId+"' has been deleted successfully.",HttpStatus.OK);
 	}

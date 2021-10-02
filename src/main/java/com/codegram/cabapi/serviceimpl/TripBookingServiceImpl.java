@@ -32,7 +32,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	EntityManager em;
 
 	@Override
-	public TripBooking insertTripBooking(TripBooking tripBooking, Long customerId) {
+	public TripBooking insertTripBooking(TripBooking tripBooking, int customerId) {
 		try {
 			Customer customer = customerRepository.findByCustomerId(customerId);
 			tripBooking.setCustomer(customer);
@@ -66,7 +66,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public List<TripBooking> viewAllTripsCustomer(Long customerId) {
+	public List<TripBooking> viewAllTripsCustomer(int customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
 		q.setParameter("customerId", customerId);
 		List<TripBooking> result = q.getResultList();
@@ -74,7 +74,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public float calculateBill(Long customerId) {
+	public float calculateBill(int customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId", TripBooking.class);
 		q.setParameter("customerId", customerId);
 		List<TripBooking> list = q.getResultList();

@@ -64,11 +64,11 @@ public class TripBookingController {
 		return new ResponseEntity<TripBooking>(tripBooking, HttpStatus.OK);
 	}
 	@GetMapping("/customer/{customerId}")
-	public List<TripBooking> viewAllTripsCustomer(@PathVariable int customerId){
+	public List<TripBooking> viewAllTripsCustomer(@PathVariable Long customerId){
 		return tripBookingService.viewAllTripsCustomer(customerId);
 	}
 	@GetMapping("/calculate/{customerId}")
-	public float calculateBill(@PathVariable int customerId) {
+	public float calculateBill(@PathVariable Long customerId) {
 		return tripBookingService.calculateBill(customerId);
 	}
 

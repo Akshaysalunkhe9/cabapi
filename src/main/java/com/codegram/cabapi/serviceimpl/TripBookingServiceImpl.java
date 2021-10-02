@@ -66,8 +66,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public List<TripBooking> viewAllTripsCustomer(int customerId) {
-		// TODO Auto-generated method stub
+	public List<TripBooking> viewAllTripsCustomer(Long customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
 		q.setParameter("customerId", customerId);
 		List<TripBooking> result = q.getResultList();
@@ -75,7 +74,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public float calculateBill(int customerId) {
+	public float calculateBill(Long customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId", TripBooking.class);
 		q.setParameter("customerId", customerId);
 		List<TripBooking> list = q.getResultList();

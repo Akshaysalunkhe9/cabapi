@@ -15,8 +15,8 @@ public interface TripBookingService {
 	public TripBooking updateTripBooking(TripBooking tripBooking);
 	public Iterable<TripBooking> deleteTripBooking(int tripBookingId);
 	public Iterable<TripBooking> findAll();
-	public List<TripBooking> viewAllTripsCustomer(int customerId);
-	public float calculateBill(int customerId);
+	public List<TripBooking> viewAllTripsCustomer(Long customerId);
+	public float calculateBill(Long customerId);
 	public TripBooking viewTripById(int tripBookingId);
 
 }

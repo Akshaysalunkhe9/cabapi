@@ -1,34 +1,44 @@
 package com.codegram.cabapi.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 /**
  * This driver class will be used to register driver
  * @author Animesh
  *
  */
+@Entity
 public class Driver{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int driverId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long Id;
+	
+	@NotBlank(message="Driver identifier is required")
+	private String driverIdentifier;
+	
+	@NotBlank(message="Driver name is required")
 	private String driverName;
+	
 	private float rating;
 	
-	public Driver(int driverId, String driverName, float rating) {
-		super();
-		this.driverId = driverId;
-		this.driverName = driverName;
-		this.rating = rating;
+	public long getId() {
+		return Id;
 	}
-	public int getDriverId() {
-		return driverId;
+	public void setId(long id) {
+		Id = id;
 	}
-	public void setDriverId(int driverId) {
-		this.driverId = driverId;
+	public String getDriverIdentifier() {
+		return driverIdentifier;
 	}
+	public void setDriverIdentifier(String driverIdentifier) {
+		this.driverIdentifier = driverIdentifier;
+	}
+	
 	public String getDriverName() {
 		return driverName;
 	}
@@ -41,6 +51,11 @@ public class Driver{
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
+
+	public Driver() {
+		super();
+	}
 	
 	
 }
+

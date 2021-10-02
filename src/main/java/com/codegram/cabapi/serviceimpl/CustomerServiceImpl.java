@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer deleteCustomer(int customerId) {
 		Customer customer=viewCustomerDetails(customerId);
 		customerRepository.delete(customer);
-		return customer;
+		return customerRepository.findById(customerId);
 		
 	}
 

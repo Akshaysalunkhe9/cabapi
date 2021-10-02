@@ -1,5 +1,7 @@
 package com.codegram.cabapi.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,14 @@ public class TripBookingController {
 	public ResponseEntity<?> getTripById(@PathVariable Integer tripBookingId){
 		TripBooking tripBooking = tripBookingService.viewTripById(tripBookingId);
 		return new ResponseEntity<TripBooking>(tripBooking, HttpStatus.OK);
+	}
+	@GetMapping("/{customerId}")
+	public List<TripBooking> viewAllTripsCustomer(@PathVariable int customerId){
+		return tripBookingService.viewAllTripsCustomer(customerId);
+	}
+	@GetMapping("/calculate/{customerId}")
+	public float calculateBill(@PathVariable int customerId) {
+		return tripBookingService.calculateBill(customerId);
 	}
 
 }

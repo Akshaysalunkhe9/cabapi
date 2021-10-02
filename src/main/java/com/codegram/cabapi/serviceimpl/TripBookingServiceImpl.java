@@ -1,6 +1,7 @@
 package com.codegram.cabapi.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -60,13 +61,15 @@ public class TripBookingServiceImpl implements TripBookingService {
 		q.setParameter("customerId", customerId);
 		List<TripBooking> result = q.getResultList();
 		return result;
-		
 	}
 
 	@Override
 	public float calculateBill(int customerId) {
-		// TODO Auto-generated method stub
-		return 0;
+		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId", TripBooking.class);
+		q.setParameter("customerId", customerId);
+		List<TripBooking> list = q.getResultList();
+		Optional<Float> result = list.stream().map((tb) -> tb.getBill()).reduce((a,b) -> a+b);
+		return result.get();
 	}
 
 	@Override

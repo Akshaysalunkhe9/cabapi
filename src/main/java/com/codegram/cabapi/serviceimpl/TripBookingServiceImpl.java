@@ -10,8 +10,10 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codegram.cabapi.domain.Customer;
 import com.codegram.cabapi.domain.TripBooking;
 import com.codegram.cabapi.exception.TripBookingIDException;
+import com.codegram.cabapi.repository.CustomerRepository;
 import com.codegram.cabapi.repository.TripBookingRepository;
 import com.codegram.cabapi.service.TripBookingService;
 
@@ -24,14 +26,23 @@ import com.codegram.cabapi.service.TripBookingService;
 public class TripBookingServiceImpl implements TripBookingService {
 	@Autowired
 	private TripBookingRepository tripBookingRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
-	public TripBooking insertTripBooking(TripBooking tripBooking) {
-		// TODO Auto-generated method stub
-		 tripBookingRepository.save(tripBooking);
-		return tripBooking;
+	public TripBooking insertTripBooking(TripBooking tripBooking, Long customerId) {
+		try {
+			Customer customer = customerRepository.findByCustomerId(customerId);
+			tripBooking.setCustomer(customer);
+			tripBookingRepository.save(tripBooking);
+			return tripBooking;
+		}
+		catch (Exception e) {
+			throw new TripBookingIDException("Customer Id :"+customerId+" does not exist.");
+		}
+		 
 	}
 
 	@Override

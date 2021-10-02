@@ -16,6 +16,7 @@ import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -31,9 +32,10 @@ public class TripBooking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tripBookingId;
 
-//	@ManyToOne(targetEntity = Customer.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "customerId", referencedColumnName = "customerId")
-//	private Customer customer;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "customerId", nullable = false, updatable = false)
+	@JsonIgnore
+	private Customer customer;
 //	@ManyToOne(targetEntity = Driver.class, fetch = FetchType.EAGER)
 //	@JoinColumn(name = "driverId", referencedColumnName = "driverId")
 //	private Driver driver;
@@ -74,12 +76,12 @@ public class TripBooking {
 	public void setTripBookingId(int tripBookingId) {
 		this.tripBookingId = tripBookingId;
 	}
-//	public Customer getCustomer() {
-//		return customer;
-//	}
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 //	public Driver getDriver() {
 //		return driver;
 //	}

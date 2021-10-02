@@ -11,7 +11,7 @@ import com.codegram.cabapi.domain.TripBooking;
  *
  */
 public interface TripBookingService {
-	public TripBooking insertTripBooking(TripBooking tripBooking);
+	public TripBooking insertTripBooking(TripBooking tripBooking, Long customerId);
 	public TripBooking updateTripBooking(TripBooking tripBooking);
 	public Iterable<TripBooking> deleteTripBooking(int tripBookingId);
 	public Iterable<TripBooking> findAll();

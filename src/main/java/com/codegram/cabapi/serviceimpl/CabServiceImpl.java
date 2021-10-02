@@ -13,43 +13,65 @@ import com.codegram.cabapi.service.CabService;
 public class CabServiceImpl implements CabService{
 
 	@Autowired
-	private CabRepository CabRepository;
+	private CabRepository cabRepository;
 	
 	@Override
-	public Cab saveOrUpdate(Cab cab) {
+	public Cab saveCab(Cab cab) {
 		
-		return CabRepository.save(cab);
-	}
-	
-	@Override
-	public Cab insertCab(Cab cab) {
-		
-		return null;
+		return cabRepository.save(cab);
 	}
 
 	@Override
 	public Cab updateCab(Cab cab) {
-		
-		return null;
+		//Cab updateCab =CabRepository.findById((long) cab.getCabId()).get();
+		Cab updateCab = cabRepository.findByCabId(cab.getCabId());
+		if (updateCab != null) {
+			updateCab.setCarType(cab.getCarType());
+			updateCab.setPerKmRate(cab.getPerKmRate());
+			cabRepository.save(updateCab);
+		}
+		return updateCab;
 	}
 
 	@Override
-	public Cab deleteCab(Cab cab) {
+	public Cab viewCabDetails(int cabId) {
+		Cab viewCab = cabRepository.findByCabId(cabId);	
+		return viewCab;
 		
-		return null;
+	}	
+	
+	@Override
+	public Cab deleteCab(int cabId) {
+		Cab customer=viewCabDetails(cabId);
+		cabRepository.delete(customer);
+		return customer;
 	}
 
+	@Override
+	public Iterable<Cab> findAll() {
+		
+		return cabRepository.findAll();
+	}
+	
+	/*
 	@Override
 	public List<Cab> viewCabsOfType(String carType) {
 		
-		return null;
+		return cabRepository.viewCabsOfType(carType);
 	}
+	*/
 
 	@Override
 	public int countCabsOfType(String carType) {
 		
 		return 0;
 	}
+
+	
+
+	
+
+	
 
 	
 

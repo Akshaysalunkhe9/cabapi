@@ -7,11 +7,12 @@ import com.codegram.cabapi.domain.Cab;
 
 public interface CabService {
 
-		public Cab saveOrUpdate(Cab cab);
-		public Cab insertCab(Cab cab);
+		public Cab saveCab(Cab cab);
 		public Cab updateCab(Cab cab);
-		public Cab deleteCab(Cab cab);
-		public List<Cab> viewCabsOfType(String carType);
+		public Cab viewCabDetails(int cabId);
+		public Cab deleteCab(int cabId);
+		public Iterable<Cab> findAll();
+		//public List<Cab> viewCabsOfType(String carType);
 		public int countCabsOfType(String carType);
 		
 }

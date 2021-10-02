@@ -46,10 +46,10 @@ public class TripBookingController {
 		TripBooking updation = tripBookingService.updateTripBooking(tripBooking);
 		return new ResponseEntity<TripBooking>(updation, HttpStatus.OK);
 	}
-//	@DeleteMapping("/{tripBookingId}")
-//	public ResponseEntity<?> deleteTrip(@Valid @PathVariable Integer tripBookingId) {
-//		tripBookingService.deleteTripBooking(tripBookingId);
-//		return new ResponseEntity<String>("Trip with id: '"+tripBookingId+"' is deleted", HttpStatus.OK);
-//	}
+	@DeleteMapping("/{tripBookingId}")
+	public ResponseEntity<?> deleteTrip(@PathVariable Integer tripBookingId) {
+		tripBookingService.deleteTripBooking(tripBookingId);
+		return new ResponseEntity<String>("Trip with id: '"+tripBookingId+"' is deleted", HttpStatus.OK);
+	}
 
 }

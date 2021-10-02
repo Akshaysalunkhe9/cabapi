@@ -47,13 +47,11 @@ public class TripBookingServiceImpl implements TripBookingService {
 
 	@Override
 	public TripBooking updateTripBooking(TripBooking tripBooking) {
-		// TODO Auto-generated method stub
 		return tripBookingRepository.save(tripBooking);
 	}
 
 	@Override
 	public Iterable<TripBooking> deleteTripBooking(int tripBookingId) {
-		// TODO Auto-generated method stub
 		tripBookingRepository.deleteById(tripBookingId);
 		return tripBookingRepository.findAll();
 
@@ -61,7 +59,6 @@ public class TripBookingServiceImpl implements TripBookingService {
 
 	@Override
 	public Iterable<TripBooking> findAll() {
-		// TODO Auto-generated method stub
 		return tripBookingRepository.findAll();
 	}
 

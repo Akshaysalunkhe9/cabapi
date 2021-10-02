@@ -13,10 +13,10 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Admin extends AbstractUser {
+public class Admin  extends AbstractUser {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int adminId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer adminId;
 	/**
 	 * name for the project
 	 */
@@ -25,15 +25,15 @@ public class Admin extends AbstractUser {
 
 	}
 
-	public int getAdminId() {
+	public Integer getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(int adminId) {
+	public void setAdminId(Integer adminId) {
 		this.adminId = adminId;
 	}
 
-	public Admin(int adminId) {
+	public Admin(Integer adminId) {
 		super();
 		this.adminId = adminId;
 	}

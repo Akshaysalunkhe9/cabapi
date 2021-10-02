@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class CustomerController {
 		
 	}
 	
-	@PatchMapping("/{customerId}")
+	@PutMapping("")
 	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Customer customer , BindingResult result){
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
@@ -49,13 +50,19 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public ResponseEntity<?> viewDriverById(@PathVariable Long customerId){
+	public ResponseEntity<?> viewCustomerDetailsById(@PathVariable int customerId){
 		Customer customer=customerService.viewCustomerDetails(customerId);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
+//	@GetMapping("/{username}")
+//	public ResponseEntity<?> viewCustomerDetailsByName(@PathVariable String username){
+//		Customer customer1=customerService.viewCustomerDetailsByName(username);
+//		return new ResponseEntity<Customer>(customer1,HttpStatus.OK);
+//	}
+//	
 	@DeleteMapping("/{customerId}")
-	public ResponseEntity<?> deleteDriverById(@PathVariable Long customerId){
+	public ResponseEntity<?> deleteDriverById(@PathVariable int customerId){
 		customerService.deleteCustomer(customerId);
 		return new ResponseEntity<String>("Customer with id '"+customerId+"' has been deleted successfully.",HttpStatus.OK);
 	}

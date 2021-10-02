@@ -4,7 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.codegram.cabapi.domain.Customer;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 			
-	Customer findByCustomerId(Long customerId);
+	Customer findById(int id);
+	Customer findByUsername(String username);
 }

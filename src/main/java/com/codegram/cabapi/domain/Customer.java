@@ -11,20 +11,21 @@ public class Customer extends AbstractUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long customerId;
+	private int id;
 
 	public Customer() {
 		super();
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public int getId() {
+		return id;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
+
+
 	
 
 }

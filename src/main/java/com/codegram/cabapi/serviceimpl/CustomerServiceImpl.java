@@ -16,39 +16,65 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer registerCustomer(Customer customer) {
-		
+		try {
 			return customerRepository.save(customer);
+		}
+		catch(Exception e) {
+			throw new CustomerIDException("Customer Id"+customer.getId()+"Already Exists");
+		}
+			
 		
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
+		try {
+			Customer updateCustomer = customerRepository.findById(customer.getId());
+			if(updateCustomer==null) {
+				throw new Exception("Customer Id not Found");
+			}
+			if(updateCustomer!=null) {
+				updateCustomer.setEmail(customer.getEmail());
+				updateCustomer.setAddress(customer.getAddress());
+				updateCustomer.setMobileNumber(customer.getMobileNumber());
+				updateCustomer.setPassword(customer.getPassword());
+				updateCustomer.setUsername(customer.getUsername());
+			}
+			return customerRepository.save(updateCustomer);
+		}catch(Exception e) {
+			throw new CustomerIDException("Customer Id"+customer.getId() +"not found");
+		}
 		
-		Customer updateCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
-		
-		updateCustomer.setEmail(customer.getEmail());
-		updateCustomer.setAddress(customer.getAddress());
-		updateCustomer.setMobileNumber(customer.getMobileNumber());
-		updateCustomer.setPassword(customer.getPassword());
-		updateCustomer.setUsername(customer.getUsername());
-		customerRepository.save(updateCustomer);
-		
-		return updateCustomer;
 	}
 
 	@Override
-	public Customer viewCustomerDetails(Long customerId) {
+	public Customer viewCustomerDetails(int customerId) {
 		// TODO Auto-generated method stub
-		Customer viewCustomer = customerRepository.findByCustomerId(customerId);	
-		return viewCustomer;
+		try {
+			Customer viewCustomer = customerRepository.findById(customerId);
+			if(viewCustomer==null) {
+				throw new Exception("Customer Id not Found");
+			}
+			return viewCustomer;
+		}catch(Exception e) {
+			throw new CustomerIDException("Customer Id"+customerId +"not found");
+		}
 	}
+		
+		
 
 	@Override
-	public Customer deleteCustomer(Long customerId) {
+	public Customer deleteCustomer(int customerId) {
 		Customer customer=viewCustomerDetails(customerId);
 		customerRepository.delete(customer);
 		return customer;
 		
+	}
+
+	@Override
+	public Customer viewCustomerDetailsByName(String username) {
+		Customer customer = customerRepository.findByUsername(username);
+		return customer;
 	}
 
 	

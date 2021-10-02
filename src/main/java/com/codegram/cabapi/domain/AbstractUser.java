@@ -15,11 +15,11 @@ public class  AbstractUser {
 	
 	private String address;
 	
-	@NotBlank(message = "provide mobile number")
+	//@NotBlank(message = "provide mobile number")
 	@Size(min = 10,max = 10 , message = "Mobile number should be of 10 digits")
 	private String mobileNumber;
 	
-	@NotBlank(message = "Provide an email id")
+	//@NotBlank(message = "Provide an email id")
 	private String email;
 	
 	

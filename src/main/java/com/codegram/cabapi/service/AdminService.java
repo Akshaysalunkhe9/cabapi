@@ -16,5 +16,5 @@ public interface AdminService {
 	
 	public Iterable<Admin> deleteAdmin(int adminId);
 	
-	
+	public Admin viewAdminById(int adminId);
 	}

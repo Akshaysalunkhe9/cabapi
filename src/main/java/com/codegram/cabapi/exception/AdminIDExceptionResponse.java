@@ -2,20 +2,21 @@ package com.codegram.cabapi.exception;
 
 public class AdminIDExceptionResponse {
 
-private String adminIdentifier;
+	public String id;
 
-	
-	public AdminIDExceptionResponse(String adminIdentifier) {
+	public AdminIDExceptionResponse(String id) {
 		super();
-		this.adminIdentifier = adminIdentifier;
-	}
-	
-	public String getAdminIdentifier() {
-		return adminIdentifier;
+		this.id = id;
 	}
 
-	public void setAdminIdentifier(String adminIdentifier) {
-		this.adminIdentifier = adminIdentifier;
+	public String id() {
+		return id;
 	}
-}
+
+	public void setCustomerId(String id) {
+		this.id = id;
+	}
 	
+	
+}
+

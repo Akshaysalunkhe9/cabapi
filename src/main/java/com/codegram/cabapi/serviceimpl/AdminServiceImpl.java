@@ -46,4 +46,13 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.findAll();
 
 	}
+	
+	@Override
+	public Admin viewAdminById(int adminId) {
+		Admin admin = adminRepository.findByadminId(adminId);
+		if(admin == null)
+			throw new AdminIDException("Admin ID :"+adminId+" does not exist");
+		return admin;
+	
+}
 }

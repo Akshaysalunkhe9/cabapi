@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.TripBooking;
 import com.codegram.cabapi.repository.TripBookingRepository;
@@ -17,6 +18,7 @@ import com.codegram.cabapi.service.TripBookingService;
  * @author Arnav
  *
  */
+@Service
 public class TripBookingServiceImpl implements TripBookingService {
 	@Autowired
 	private TripBookingRepository tripBookingRepository;

@@ -128,5 +128,9 @@ public class TripBooking {
 	public void setBill(float bill) {
 		this.bill = bill;
 	}
+//	@PrePersist
+//	protected void onCreate() {
+//		this.fromDateTime = LocalDateTime.now();
+//	}
 	
 }

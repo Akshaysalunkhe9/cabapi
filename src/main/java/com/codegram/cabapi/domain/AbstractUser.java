@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class  AbstractUser {
-		
+	
 	@NotBlank(message = "Username is Required")
 	private String username;
 	

@@ -45,6 +45,7 @@ public class DriverController {
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	
+	//Get driver by id
 	@GetMapping("/{driverId}")
 	public ResponseEntity<?> getDriverById(@PathVariable String driverId)
 	{
@@ -53,8 +54,20 @@ public class DriverController {
 		
 	}
 	
+	//Get best drivers with rating > 4.5
+	@GetMapping("/bestdrivers")
+	public ResponseEntity<?> viewBestDrivers(){
+		List<Driver> bestDrivers=driverService.viewBestDrivers();
+		return new ResponseEntity<List<Driver>>(bestDrivers,HttpStatus.OK);
 	
 }
 	
+	//Delete a driver based on driver id
+	@DeleteMapping("/{driverId}")
+	public ResponseEntity<?> deleteDriverById(@PathVariable String driverId){
+		driverService.deleteDriver(driverId);
+		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
+	}
 	
+}
 	

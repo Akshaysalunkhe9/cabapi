@@ -14,4 +14,7 @@ public interface DriverService {
 	
 	public Driver findDriverByDriverIdentifier(String driverId);
 
+	public List<Driver> viewBestDrivers();
+
+	public Driver deleteDriver(String driverId);
 }

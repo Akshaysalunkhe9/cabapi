@@ -1,9 +1,12 @@
 package com.codegram.cabapi.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,16 +26,19 @@ public class Cab {
 		private String carType;
 		private float perKmRate;
 		
+		@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cab")
+		private Driver driver;
+		
 		public Cab() {
 			super();
 		}
 		
-		public Cab(int cabId, String carType, float perKmRate) {
+		/*public Cab(int cabId, String carType, float perKmRate) {
 			super();
 			this.cabId = cabId;
 			this.carType = carType;
 			this.perKmRate = perKmRate;
-		}
+		}*/
 
 		public int getCabId() {
 			return cabId;
@@ -56,6 +62,14 @@ public class Cab {
 
 		public void setPerKmRate(float perKmRate) {
 			this.perKmRate = perKmRate;
+		}
+
+		public Driver getDriver() {
+			return driver;
+		}
+
+		public void setDriver(Driver driver) {
+			this.driver = driver;
 		}
 		
 		

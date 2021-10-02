@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.TripBooking;
+import com.codegram.cabapi.exception.TripBookingIDException;
 import com.codegram.cabapi.repository.TripBookingRepository;
 import com.codegram.cabapi.service.TripBookingService;
 
@@ -69,12 +70,11 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public List<TripBooking> viewAllTripsById(int tripBookingId) {
-		// TODO Auto-generated method stub
-		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.tripBookingId=:tripBookingId", TripBooking.class);
-		q.setParameter("tripBookingId", tripBookingId);
-		List<TripBooking> result = q.getResultList();
-		return result;
+	public TripBooking viewTripById(int tripBookingId) {
+		TripBooking tripBooking = tripBookingRepository.findBytripBookingId(tripBookingId);
+		if(tripBooking == null)
+			throw new TripBookingIDException("TripBooking ID :"+tripBookingId+" does not exist");
+		return tripBooking;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,7 +37,7 @@ public class TripBookingController {
 		if(errorMap!=null) 
 			return errorMap;
 		TripBooking insertTrip = tripBookingService.insertTripBooking(tripBooking);
-		return new ResponseEntity<TripBooking>(tripBooking, HttpStatus.CREATED);
+		return new ResponseEntity<TripBooking>(insertTrip, HttpStatus.CREATED);
 	}
 	@PutMapping("")
 	public ResponseEntity<?> updateTrip(@Valid @RequestBody TripBooking tripBooking, BindingResult result) {
@@ -50,6 +51,15 @@ public class TripBookingController {
 	public ResponseEntity<?> deleteTrip(@PathVariable Integer tripBookingId) {
 		tripBookingService.deleteTripBooking(tripBookingId);
 		return new ResponseEntity<String>("Trip with id: '"+tripBookingId+"' is deleted", HttpStatus.OK);
+	}
+	@GetMapping("/all")
+	public Iterable<TripBooking> getAllTrips(){
+		return tripBookingService.findAll();
+	}
+	@GetMapping("/{tripBookingId}")
+	public ResponseEntity<?> getTripById(@PathVariable Integer tripBookingId){
+		TripBooking tripBooking = tripBookingService.viewTripById(tripBookingId);
+		return new ResponseEntity<TripBooking>(tripBooking, HttpStatus.OK);
 	}
 
 }

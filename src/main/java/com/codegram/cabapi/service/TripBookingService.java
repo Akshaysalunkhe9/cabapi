@@ -17,6 +17,6 @@ public interface TripBookingService {
 	public Iterable<TripBooking> findAll();
 	public List<TripBooking> viewAllTripsCustomer(int customerId);
 	public float calculateBill(int customerId);
-	public List<TripBooking> viewAllTripsById(int tripBookingId);
+	public TripBooking viewTripById(int tripBookingId);
 
 }

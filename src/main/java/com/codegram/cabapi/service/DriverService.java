@@ -14,5 +14,4 @@ public interface DriverService {
 	
 	public Driver findDriverByDriverIdentifier(String driverId);
 
-	
 }

@@ -25,9 +25,9 @@ public class CabServiceImpl implements CabService{
 	public Cab saveCab(Cab cab) {
 		//try {
 				
-					Driver driver=new Driver();
+					/*Driver driver=new Driver();
 					cab.setDriver(driver);
-					driver.setCab(cab);
+					driver.setCab(cab);*/
 					return cabRepository.save(cab);
 		//}catch(Exception e) {
 		//	throw new CabIDException("Project Id "+cab.getCabId()+" already exists");

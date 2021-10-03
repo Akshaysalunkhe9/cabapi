@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Driver;
+import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.DriverService;
 
@@ -17,8 +19,17 @@ public class DriverServiceImpl implements DriverService {
 	@Autowired
 	private DriverRepository driverRepository; 
 	
+	@Autowired
+	private CabRepository cabRepository;
+	
 	@Override
-	public Driver saveOrUpdate(Driver driver) {
+	public Driver saveOrUpdate(Driver driver,int cabId) {
+			
+			Cab cab = new Cab();
+			cab = cabRepository.findByCabId(cabId);
+			driver.setCab(cab);
+			
+			
 			return driverRepository.save(driver);
 		}
 

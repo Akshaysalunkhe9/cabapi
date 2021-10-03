@@ -53,6 +53,12 @@ public class AdminServiceImpl implements AdminService {
 		if(admin == null)
 			throw new AdminIDException("Admin ID :"+adminId+" does not exist");
 		return admin;
+	}
+		
+		@Override
+		public Admin viewAdminDetailsByEmail(String email) {
+			Admin admin = adminRepository.findByEmail(email);
+			return admin;
 	
 }
 }

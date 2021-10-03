@@ -17,4 +17,6 @@ public interface AdminService {
 	public Iterable<Admin> deleteAdmin(int adminId);
 	
 	public Admin viewAdminById(int adminId);
+	
+	public Admin viewAdminDetailsByEmail(String email);
 	}

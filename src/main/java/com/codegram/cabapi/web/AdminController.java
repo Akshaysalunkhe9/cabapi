@@ -69,6 +69,11 @@ public class AdminController {
 		
 		
 	}
+		@GetMapping("email/{email}")
+		public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
+			Admin admin=adminService.viewAdminDetailsByEmail(email);
+			return new ResponseEntity<Admin>(admin,HttpStatus.OK);
+		}
 }
 
 	

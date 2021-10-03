@@ -37,21 +37,35 @@ public class DriverController {
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 	
-	@PostMapping("")
-	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result){
+	@PostMapping("/{cabId}")
+	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result,@PathVariable int cabId){                                      
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		Driver savedDriver = driverService.saveOrUpdate(driver);
+		Driver savedDriver = driverService.saveOrUpdate(driver,cabId);
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	
+	//List of all drivers
 	@GetMapping("/{driverId}")
-	public ResponseEntity<?> getDriverById(@PathVariable String driverId)
-	{
-		Driver driver = driverService.findDriverByDriverIdentifier(driverId);
-		return new ResponseEntity<Driver>(driver, HttpStatus.OK);
-		
+	public ResponseEntity<?> viewDriverById(@PathVariable long driverId){
+		Driver driver=driverService.viewDriverDetails(driverId);
+		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
 	}
 	
+	
+	//Get best drivers with rating > 4.5
+	@GetMapping("/bestdrivers")
+	public ResponseEntity<?> viewBestDrivers(){
+		List<Driver> bestDrivers=driverService.viewBestDrivers();
+		return new ResponseEntity<List<Driver>>(bestDrivers,HttpStatus.OK);
+	
+}
+	
+	//Delete a driver based on driver id
+	@DeleteMapping("/{driverId}")
+	public ResponseEntity<?> deleteDriverById(@PathVariable Long driverId){
+		driverService.deleteDriver(driverId);
+		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
+	}
 	
 }

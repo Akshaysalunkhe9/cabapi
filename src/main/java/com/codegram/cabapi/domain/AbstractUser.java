@@ -1,12 +1,13 @@
 package com.codegram.cabapi.domain;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class  AbstractUser {
-	
+		
 	@NotBlank(message = "Username is Required")
 	private String username;
 	
@@ -15,11 +16,12 @@ public class  AbstractUser {
 	
 	private String address;
 	
-	@NotBlank(message = "provide mobile number")
+	//@NotBlank(message = "provide mobile number")
 	@Size(min = 10,max = 10 , message = "Mobile number should be of 10 digits")
 	private String mobileNumber;
 	
 	@NotBlank(message = "Provide an email id")
+	@Column(unique = true, updatable = false)
 	private String email;
 	
 	

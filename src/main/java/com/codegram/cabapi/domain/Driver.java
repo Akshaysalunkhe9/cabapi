@@ -1,10 +1,15 @@
 package com.codegram.cabapi.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+//import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * This driver class will be used to register driver
@@ -12,47 +17,55 @@ import javax.validation.constraints.NotBlank;
  *
  */
 @Entity
-public class Driver{
+public class Driver extends AbstractUser{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
-	
-	@NotBlank(message="Driver identifier is required")
-	private String driverIdentifier;
-	
-	@NotBlank(message="Driver name is required")
-	private String driverName;
+	private long driverId;
 	
 	private float rating;
+	private long licenseNumber;
 	
-	public long getId() {
-		return Id;
-	}
-	public void setId(long id) {
-		Id = id;
-	}
-	public String getDriverIdentifier() {
-		return driverIdentifier;
-	}
-	public void setDriverIdentifier(String driverIdentifier) {
-		this.driverIdentifier = driverIdentifier;
-	}
+	// One to one with cab
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="cab_id", nullable = false, updatable = false)
+	@JsonIgnore
+	private Cab cab;
 	
-	public String getDriverName() {
-		return driverName;
+	public long getDriverId() {
+		return driverId;
 	}
-	public void setDriverName(String driverName) {
-		this.driverName = driverName;
+
+	public void setDriverId(long driverId) {
+		this.driverId = driverId;
 	}
+
 	public float getRating() {
 		return rating;
 	}
+
 	public void setRating(float rating) {
 		this.rating = rating;
+	}
+
+	public long getLicenseNumber() {
+		return licenseNumber;
+	}
+
+	public void setLicenseNumber(long licenseNumber) {
+		this.licenseNumber = licenseNumber;
 	}
 
 	public Driver() {
 		super();
 	}
+
+	public Cab getCab() {
+		return cab;
+	}
+
+	public void setCab(Cab cab) {
+		this.cab = cab;
+	}
+	
 }

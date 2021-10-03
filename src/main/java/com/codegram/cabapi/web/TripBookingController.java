@@ -25,7 +25,7 @@ import com.codegram.cabapi.service.MapValidationErrorService;
  * @author Arnav
  *
  */
-@RestController
+@RestController // used to return data in form of JSON
 @RequestMapping("/api/tripbooking")
 public class TripBookingController {
 	@Autowired

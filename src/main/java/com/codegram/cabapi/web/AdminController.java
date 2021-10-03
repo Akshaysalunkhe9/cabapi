@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codegram.cabapi.domain.Admin;
 import com.codegram.cabapi.service.AdminService;
 import com.codegram.cabapi.service.MapValidationErrorService;
+import com.codegram.cabapi.domain.Customer;
+import com.codegram.cabapi.domain.TripBooking;
 /**
  * 
  * @author Aniket
@@ -61,7 +63,7 @@ public class AdminController {
 			adminService.deleteAdmin(adminId);
 			return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
 		}
-		
+	
 		@GetMapping("/{adminId}")
 		public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
 			Admin admin = adminService.viewAdminById(adminId);
@@ -74,6 +76,14 @@ public class AdminController {
 			Admin admin=adminService.viewAdminDetailsByEmail(email);
 			return new ResponseEntity<Admin>(admin,HttpStatus.OK);
 		}
+		
+		@GetMapping("/customer/{customerId}")
+		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
+			return adminService.viewAllTripsCustomer(customerId);
 }
+		@GetMapping("datewise")
+		public List<TripBooking> viewTripsDateWise(){
+           return adminService.viewTripsDateWise();
+		}
 
-	
+}

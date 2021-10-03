@@ -13,10 +13,12 @@ public interface CustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 	
-	public Customer viewCustomerDetails(int id);
+	public Customer viewCustomerDetails(int customerId);
 	
-	public Customer deleteCustomer(int id);
+	public Customer deleteCustomer(int customerId);
 	
 	public Customer viewCustomerDetailsByName(String username);
+	
+	public Customer viewCustomerDetailsByEmail(String email);
 	
 }

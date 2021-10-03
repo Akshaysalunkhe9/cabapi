@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return customerRepository.save(customer);
 		}
 		catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getId()+"Already Exists");
+			throw new CustomerIDException("Customer Id"+customer.getCustomerId()+"Already Exists");
 		}
 			
 		
@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer) {
 		try {
-			Customer updateCustomer = customerRepository.findById(customer.getId());
+			Customer updateCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
 			if(updateCustomer==null) {
 				throw new Exception("Customer Id not Found");
 			}
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 			return customerRepository.save(updateCustomer);
 		}catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getId() +"not found");
+			throw new CustomerIDException("Customer Id"+customer.getCustomerId() +"not found");
 		}
 		
 	}
@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer viewCustomerDetails(int customerId) {
 		// TODO Auto-generated method stub
 		try {
-			Customer viewCustomer = customerRepository.findById(customerId);
+			Customer viewCustomer = customerRepository.findByCustomerId(customerId);
 			if(viewCustomer==null) {
 				throw new Exception("Customer Id not Found");
 			}
@@ -67,13 +67,19 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer deleteCustomer(int customerId) {
 		Customer customer=viewCustomerDetails(customerId);
 		customerRepository.delete(customer);
-		return customerRepository.findById(customerId);
+		return customerRepository.findByCustomerId(customerId);
 		
 	}
 
 	@Override
 	public Customer viewCustomerDetailsByName(String username) {
 		Customer customer = customerRepository.findByUsername(username);
+		return customer;
+	}
+
+	@Override
+	public Customer viewCustomerDetailsByEmail(String email) {
+		Customer customer = customerRepository.findByEmail(email);
 		return customer;
 	}
 

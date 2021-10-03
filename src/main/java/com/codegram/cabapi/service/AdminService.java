@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
 
+import com.codegram.cabapi.domain.TripBooking;
 
+import com.codegram.cabapi.domain.Customer;
+
+import java.util.List;
 
 public interface AdminService {
 
@@ -19,4 +23,10 @@ public interface AdminService {
 	public Admin viewAdminById(int adminId);
 	
 	public Admin viewAdminDetailsByEmail(String email);
+	
+	public List<TripBooking> viewAllTripsCustomer(int customerId);
+	
+	public List<TripBooking> viewTripsDateWise();
+
+
 	}

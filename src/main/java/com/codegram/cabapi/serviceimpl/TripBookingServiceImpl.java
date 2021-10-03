@@ -10,10 +10,14 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Customer;
+import com.codegram.cabapi.domain.Driver;
 import com.codegram.cabapi.domain.TripBooking;
 import com.codegram.cabapi.exception.TripBookingIDException;
+import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.CustomerRepository;
+import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.repository.TripBookingRepository;
 import com.codegram.cabapi.service.TripBookingService;
 
@@ -27,15 +31,24 @@ public class TripBookingServiceImpl implements TripBookingService {
 	@Autowired
 	private TripBookingRepository tripBookingRepository;
 	@Autowired
+	private CabRepository cabRepository;
+	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
+	private DriverRepository driverRepository;
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
-	public TripBooking insertTripBooking(TripBooking tripBooking, int customerId) {
+	public TripBooking insertTripBooking(TripBooking tripBooking, int customerId, int cabId, int driverId) {
 		try {
 			Customer customer = customerRepository.findByCustomerId(customerId);
+			Cab cab = cabRepository.findByCabId(cabId);
+			Driver driver = driverRepository.findByDriverId(driverId);
 			tripBooking.setCustomer(customer);
+			tripBooking.setCab(cab);
+			tripBooking.setDriver(driver);
+			tripBooking.setBill( tripBooking.getDistanceInKm() * cab.getPerKmRate());
 			tripBookingRepository.save(tripBooking);
 			return tripBooking;
 		}
@@ -71,7 +84,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public float calculateBill(int customerId) {
+	public float calculateTotalBill(int customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId", TripBooking.class);
 		q.setParameter("customerId", customerId);
 		List<TripBooking> list = q.getResultList();

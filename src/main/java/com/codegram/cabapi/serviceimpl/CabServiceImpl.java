@@ -23,16 +23,11 @@ public class CabServiceImpl implements CabService{
 	
 	@Override
 	public Cab saveCab(Cab cab) {
-		//try {
-				
-					/*Driver driver=new Driver();
-					cab.setDriver(driver);
-					driver.setCab(cab);*/
-					return cabRepository.save(cab);
-		//}catch(Exception e) {
-		//	throw new CabIDException("Project Id "+cab.getCabId()+" already exists");
-		//}
-		
+//			Driver driver= driverRepository.findByDriverId(driverId);
+//			cab.setDriver(driver);
+//			//driver.setCab(cab);
+			cabRepository.save(cab);
+			return cab;
 	}
 
 	@Override
@@ -63,7 +58,6 @@ public class CabServiceImpl implements CabService{
 
 	@Override
 	public Iterable<Cab> findAll() {
-		
 		return cabRepository.findAll();
 	}
 	

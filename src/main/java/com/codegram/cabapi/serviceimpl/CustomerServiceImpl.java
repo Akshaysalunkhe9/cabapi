@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return customerRepository.save(customer);
 		}
 		catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getCustomerId()+"Already Exists");
+			throw new CustomerIDException("Customer Id"+customer.getCustomerId() +"Already Exists");
 		}
 			
 		
@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 			return viewCustomer;
 		}catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customerId +"not found");
+			throw new CustomerIDException("Customer Id"+customerId+"not found");
 		}
 	}
 		
@@ -75,6 +75,22 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer viewCustomerDetailsByName(String username) {
 		Customer customer = customerRepository.findByUsername(username);
 		return customer;
+	}
+
+	@Override
+	public Customer viewCustomerDetailsByEmail(String email) {
+		try {
+			Customer customer = customerRepository.findByEmail(email);
+			if(customer==null) {
+				throw new Exception("Customer with "+customer.getCustomerId()+"not Found");
+			}
+			return customer;
+		}
+		catch(Exception e) {
+			throw new CustomerIDException("Customer not found");
+		}
+		
+		
 	}
 
 	

@@ -33,12 +33,12 @@ public class TripBookingController {
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 	
-	@PostMapping("/{customerId}")
-	public ResponseEntity<?> createNewTrip(@Valid @RequestBody TripBooking tripBooking, BindingResult result, @PathVariable Integer customerId) {
+	@PostMapping("/{customerId}/{cabId}/{driverId}")
+	public ResponseEntity<?> createNewTrip(@Valid @RequestBody TripBooking tripBooking, BindingResult result, @PathVariable Integer customerId, @PathVariable Integer cabId, @PathVariable Integer driverId) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) 
 			return errorMap;
-		TripBooking insertTrip = tripBookingService.insertTripBooking(tripBooking, customerId);
+		TripBooking insertTrip = tripBookingService.insertTripBooking(tripBooking, customerId, cabId, driverId);
 		return new ResponseEntity<TripBooking>(insertTrip, HttpStatus.CREATED);
 	}
 	@PutMapping("")
@@ -69,7 +69,7 @@ public class TripBookingController {
 	}
 	@GetMapping("/calculate/{customerId}")
 	public float calculateBill(@PathVariable Integer customerId) {
-		return tripBookingService.calculateBill(customerId);
+		return tripBookingService.calculateTotalBill(customerId);
 	}
 
 }

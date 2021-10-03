@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.codegram.cabapi.domain.Driver;
 
 @Repository
-public interface DriverRepository extends JpaRepository<Driver, Long> {
+public interface DriverRepository extends JpaRepository<Driver, Integer> {
 
-	Driver findByDriverId(Long driverId);
+	Driver findByDriverId(int driverId);
 	
 }

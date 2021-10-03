@@ -19,4 +19,6 @@ public interface CustomerService {
 	
 	public Customer viewCustomerDetailsByName(String username);
 	
+	public Customer viewCustomerDetailsByEmail(String email);
+	
 }

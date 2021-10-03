@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codegram.cabapi.domain.Driver;
+import com.codegram.cabapi.domain.TripBooking;
 import com.codegram.cabapi.service.DriverService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
@@ -37,17 +39,17 @@ public class DriverController {
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 	
-	@PostMapping("/{cabId}")
-	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result,@PathVariable int cabId){                                      
+	@PostMapping("")
+	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result){                                      
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		Driver savedDriver = driverService.saveOrUpdate(driver,cabId);
+		Driver savedDriver = driverService.saveOrUpdate(driver);
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	
 	//List of all drivers
 	@GetMapping("/{driverId}")
-	public ResponseEntity<?> viewDriverById(@PathVariable long driverId){
+	public ResponseEntity<?> viewDriverById(@PathVariable int driverId){
 		Driver driver=driverService.viewDriverDetails(driverId);
 		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
 	}
@@ -63,9 +65,13 @@ public class DriverController {
 	
 	//Delete a driver based on driver id
 	@DeleteMapping("/{driverId}")
-	public ResponseEntity<?> deleteDriverById(@PathVariable Long driverId){
+	public ResponseEntity<?> deleteDriverById(@PathVariable int driverId){
 		driverService.deleteDriver(driverId);
 		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
+	}
+	@GetMapping("/all")
+	public Iterable<Driver> getAllTrips(){
+		return driverService.findAll();
 	}
 	
 }

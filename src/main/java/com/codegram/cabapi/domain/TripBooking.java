@@ -36,9 +36,16 @@ public class TripBooking {
 	@JoinColumn(name = "customerId", nullable = false, updatable = false)
 	@JsonIgnore
 	private Customer customer;
-//	@ManyToOne(targetEntity = Driver.class, fetch = FetchType.EAGER)
-//	@JoinColumn(name = "driverId", referencedColumnName = "driverId")
-//	private Driver driver;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "cabId", nullable = false, updatable = false)
+	@JsonIgnore
+	private Cab cab;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "driverId", nullable = false, updatable = false)
+	@JsonIgnore
+	private Driver driver;
+
 	@NotBlank(message="From Location is required")
 	private String fromLocation;
 	@NotBlank(message="From Location is required")
@@ -82,12 +89,6 @@ public class TripBooking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-//	public Driver getDriver() {
-//		return driver;
-//	}
-//	public void setDriver(Driver driver) {
-//		this.driver = driver;
-//	}
 	public String getFromLocation() {
 		return fromLocation;
 	}
@@ -130,6 +131,23 @@ public class TripBooking {
 	public void setBill(float bill) {
 		this.bill = bill;
 	}
+
+	public Cab getCab() {
+		return cab;
+	}
+
+	public void setCab(Cab cab) {
+		this.cab = cab;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+	
 //	@PrePersist
 //	protected void onCreate() {
 //		this.fromDateTime = LocalDateTime.now();

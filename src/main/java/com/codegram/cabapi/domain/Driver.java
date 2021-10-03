@@ -1,11 +1,16 @@
 package com.codegram.cabapi.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 //import javax.validation.constraints.NotBlank;
 
@@ -21,22 +26,19 @@ public class Driver extends AbstractUser{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long driverId;
+	private int driverId;
 	
 	private float rating;
-	private long licenseNumber;
+	private String licenseNumber;
 	
-	// One to one with cab
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="cab_id", nullable = false, updatable = false)
-	@JsonIgnore
-	private Cab cab;
+	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
+	//private List<Cab> cab = new ArrayList<>();
 	
-	public long getDriverId() {
+	public int getDriverId() {
 		return driverId;
 	}
 
-	public void setDriverId(long driverId) {
+	public void setDriverId(int driverId) {
 		this.driverId = driverId;
 	}
 
@@ -48,11 +50,11 @@ public class Driver extends AbstractUser{
 		this.rating = rating;
 	}
 
-	public long getLicenseNumber() {
+	public String getLicenseNumber() {
 		return licenseNumber;
 	}
 
-	public void setLicenseNumber(long licenseNumber) {
+	public void setLicenseNumber(String licenseNumber) {
 		this.licenseNumber = licenseNumber;
 	}
 
@@ -60,12 +62,14 @@ public class Driver extends AbstractUser{
 		super();
 	}
 
-	public Cab getCab() {
-		return cab;
-	}
+//	public List<Cab> getCab() {
+//		return cab;
+//	}
+//
+//	public void setCab(List<Cab> cab) {
+//		this.cab = cab;
+//	}
 
-	public void setCab(Cab cab) {
-		this.cab = cab;
-	}
+	
 	
 }

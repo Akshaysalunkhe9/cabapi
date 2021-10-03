@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Driver;
+import com.codegram.cabapi.domain.TripBooking;
 import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.DriverService;
@@ -23,13 +24,7 @@ public class DriverServiceImpl implements DriverService {
 	private CabRepository cabRepository;
 	
 	@Override
-	public Driver saveOrUpdate(Driver driver,int cabId) {
-			
-			Cab cab = new Cab();
-			cab = cabRepository.findByCabId(cabId);
-			driver.setCab(cab);
-			
-			
+	public Driver saveOrUpdate(Driver driver) {
 			return driverRepository.save(driver);
 		}
 
@@ -42,16 +37,20 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	@Override
-	public Driver viewDriverDetails(long driverId) {
+	public Driver viewDriverDetails(int driverId) {
 		Driver driver= driverRepository.findByDriverId(driverId);
 		return driver;
 	}
 
 	@Override
-	public Driver deleteDriver(long driverId) {
+	public Driver deleteDriver(int driverId) {
 		Driver driver=viewDriverDetails(driverId);
 		driverRepository.delete(driver);
 		return driver;
+	}
+	@Override
+	public Iterable<Driver> findAll() {
+		return driverRepository.findAll();
 	}
 
 

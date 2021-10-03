@@ -1,6 +1,8 @@
 package com.codegram.cabapi.serviceimpl;
 
 import java.util.List;
+import java.time.LocalDateTime;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +15,10 @@ import com.codegram.cabapi.domain.Admin;
 import com.codegram.cabapi.exception.AdminIDException;
 import com.codegram.cabapi.repository.AdminRepository;
 import com.codegram.cabapi.service.AdminService;
+import com.codegram.cabapi.domain.TripBooking;
+import com.codegram.cabapi.domain.Customer;
+import java.util.stream.Collectors;
+
 
 
 /**
@@ -60,5 +66,24 @@ public class AdminServiceImpl implements AdminService {
 			Admin admin = adminRepository.findByEmail(email);
 			return admin;
 	
+   }
+		@Override
+		public List<TripBooking> viewAllTripsCustomer(int customerId) {
+			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
+			q.setParameter("customerId", customerId);
+			List<TripBooking> result = q.getResultList();
+			return result;
 }
+
+		@Override
+		public List<TripBooking> viewTripsDateWise() {
+			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
+			List<TripBooking> trips = q.getResultList();
+			trips = trips.stream().sorted((a, b) -> a.getFromDateTime().compareTo(b.getFromDateTime()))
+					.collect(Collectors.toList());
+			return trips;
+			
+		}
+
+
 }

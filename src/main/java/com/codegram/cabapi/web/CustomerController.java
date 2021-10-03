@@ -41,7 +41,7 @@ public class CustomerController {
 		
 	}
 	
-	@PutMapping("/{customerId}")
+	@PutMapping("")
 	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Customer customer , BindingResult result){
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
@@ -50,13 +50,19 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{customerId}")
-	public ResponseEntity<?> viewDriverById(@PathVariable Integer customerId){
+	public ResponseEntity<?> viewCustomerDetailsById(@PathVariable Integer customerId){
 		Customer customer=customerService.viewCustomerDetails(customerId);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewCustomerDetailsByEmail(@PathVariable String email){
+		Customer customer=customerService.viewCustomerDetailsByEmail(email);
+		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/{customerId}")
-	public ResponseEntity<?> deleteDriverById(@PathVariable Integer customerId){
+	public ResponseEntity<?> deleteCustomerById(@PathVariable Integer customerId){
 		customerService.deleteCustomer(customerId);
 		return new ResponseEntity<String>("Customer with id '"+customerId+"' has been deleted successfully.",HttpStatus.OK);
 	}

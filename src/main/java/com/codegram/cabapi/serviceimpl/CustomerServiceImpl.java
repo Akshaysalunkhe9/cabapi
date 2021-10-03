@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return customerRepository.save(customer);
 		}
 		catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getCustomerId()+"Already Exists");
+			throw new CustomerIDException("Customer Id"+customer.getCustomerId() +"Already Exists");
 		}
 			
 		
@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 			return viewCustomer;
 		}catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customerId +"not found");
+			throw new CustomerIDException("Customer Id"+customerId+"not found");
 		}
 	}
 		

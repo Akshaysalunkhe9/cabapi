@@ -2,6 +2,8 @@ package com.codegram.cabapi.service;
 
 import javax.validation.Valid;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
@@ -28,5 +30,8 @@ public interface AdminService {
 	
 	public List<TripBooking> viewTripsDateWise();
 
+	public List<TripBooking> getTripsCustomerwise();
+	
+	public List<TripBooking> getAllTripsForDays(int customerId, LocalDateTime fromDate, LocalDateTime toDate);
 
 	}

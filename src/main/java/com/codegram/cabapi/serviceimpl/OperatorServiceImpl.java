@@ -1,6 +1,7 @@
 package com.codegram.cabapi.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 import java.time.LocalDateTime;
 
 
@@ -100,10 +101,15 @@ public class OperatorServiceImpl implements OperatorService {
 		Long result = q.getSingleResult();
 		return result;
 	}
-	@Override
-	public Long totalIncome() {
-		TypedQuery<Long> q = em.createQuery("select SUM(bill) from TripBooking", Long.class);
-		Long result = q.getSingleResult();
-		return result;
-	}
+//	@Override
+//	public float totalIncome() {
+////		TypedQuery<Float> q = em.createQuery("select SUM(tb.bill) from TripBooking tb", Float.class);
+////		Float result = q.getSingleResult();
+////		return 0;
+//		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
+//		List<TripBooking> list = q.getResultList();
+//		Optional<Float> result = list.stream().map((tb) -> tb.getBill()).reduce((a,b) -> a+b);
+//		return result.get();
+//	}
+	
 }

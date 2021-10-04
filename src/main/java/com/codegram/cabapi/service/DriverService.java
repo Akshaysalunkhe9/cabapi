@@ -16,6 +16,6 @@ public interface DriverService {
     public Driver viewDriverDetails(int driverId);
 	public Driver deleteDriver(int driverId);
 	public Iterable<Driver> findAll();
-	
+	public Driver viewDriverDetailsByEmail(String email);
 	
 }

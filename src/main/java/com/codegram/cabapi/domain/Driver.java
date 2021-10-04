@@ -33,6 +33,8 @@ public class Driver extends AbstractUser{
 	
 	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
 	//private List<Cab> cab = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
+	private List<TripBooking> tripBooking =  new ArrayList<>();
 	
 	public int getDriverId() {
 		return driverId;
@@ -62,6 +64,14 @@ public class Driver extends AbstractUser{
 		super();
 	}
 
+	public List<TripBooking> getTripBooking() {
+		return tripBooking;
+	}
+
+	public void setTripBooking(List<TripBooking> tripBooking) {
+		this.tripBooking = tripBooking;
+	}
+
 //	public List<Cab> getCab() {
 //		return cab;
 //	}
@@ -69,6 +79,7 @@ public class Driver extends AbstractUser{
 //	public void setCab(List<Cab> cab) {
 //		this.cab = cab;
 //	}
+	
 
 	
 	

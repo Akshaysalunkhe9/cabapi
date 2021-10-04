@@ -9,7 +9,7 @@ import com.codegram.cabapi.domain.Customer;
 
 public interface CustomerService {
 
-	public Customer registerCustomer(Customer customer);
+public Customer registerCustomer(Customer customer);
 	
 	public Customer updateCustomer(Customer customer);
 	

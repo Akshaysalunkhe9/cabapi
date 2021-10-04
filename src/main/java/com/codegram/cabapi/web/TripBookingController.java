@@ -26,7 +26,7 @@ import com.codegram.cabapi.service.MapValidationErrorService;
  *
  */
 @RestController
-@RequestMapping("/api/tripbooking")
+@RequestMapping("/api/tripbookings")
 public class TripBookingController {
 	@Autowired
 	private TripBookingService tripBookingService;

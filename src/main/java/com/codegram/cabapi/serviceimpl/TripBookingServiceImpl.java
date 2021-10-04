@@ -64,10 +64,17 @@ public class TripBookingServiceImpl implements TripBookingService {
 	}
 
 	@Override
-	public Iterable<TripBooking> deleteTripBooking(int tripBookingId) {
-		tripBookingRepository.deleteById(tripBookingId);
-		return tripBookingRepository.findAll();
-
+	public void deleteTripBooking(int tripBookingId) {
+		try {
+			TripBooking tripBooking = tripBookingRepository.findBytripBookingId(tripBookingId);
+			if(tripBooking == null)
+				throw new TripBookingIDException("TripBooking ID :"+tripBookingId+" does not exist");
+			tripBookingRepository.delete(tripBooking);
+		}
+		catch (Exception e) {
+			throw new TripBookingIDException("TripBooking ID :"+tripBookingId+" does not exist");
+		}
+		
 	}
 
 	@Override

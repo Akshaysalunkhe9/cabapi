@@ -1,10 +1,12 @@
 package com.codegram.cabapi.web;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -58,32 +60,43 @@ public class AdminController {
 		Admin updation = adminService.updateAdmin(admin);
 		return new ResponseEntity<Admin>(updation, HttpStatus.OK);
 	}
-		@DeleteMapping("/{adminId}")
-		public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
-			adminService.deleteAdmin(adminId);
-			return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
-		}
 	
-		@GetMapping("/{adminId}")
-		public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
-			Admin admin = adminService.viewAdminById(adminId);
-			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
-		
-		
+	@DeleteMapping("/{adminId}")
+	public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
+		adminService.deleteAdmin(adminId);
+		return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
 	}
-		@GetMapping("email/{email}")
-		public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
-			Admin admin=adminService.viewAdminDetailsByEmail(email);
-			return new ResponseEntity<Admin>(admin,HttpStatus.OK);
-		}
-		
-		@GetMapping("/customer/{customerId}")
+
+	@GetMapping("/{adminId}")
+	public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
+		Admin admin = adminService.viewAdminById(adminId);
+		return new ResponseEntity<Admin>(admin, HttpStatus.OK);	
+	}
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
+		Admin admin=adminService.viewAdminDetailsByEmail(email);
+		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
+	}
+	
+	@GetMapping("/customer/{customerId}")
 		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
 			return adminService.viewAllTripsCustomer(customerId);
 }
-		@GetMapping("datewise")
-		public List<TripBooking> viewTripsDateWise(){
-           return adminService.viewTripsDateWise();
-		}
+	@GetMapping("datewise")
+	public List<TripBooking> viewTripsDateWise(){
+       return adminService.viewTripsDateWise();
+	}
+	@GetMapping("/customerwise")
+	public List<TripBooking> getTripsCustomerwise() {
+		return adminService.getTripsCustomerwise();
+	}
+	
+	@GetMapping("fordays/{customerId}/{fromDate}/{toDate}")
+	public List<TripBooking> getAllTripsForDays(@PathVariable("customerId") int customerId,
+			@PathVariable("fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
+			@PathVariable("toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate)
+		 {
+		return adminService.getAllTripsForDays(customerId, fromDate, toDate);
+	}
 
 }

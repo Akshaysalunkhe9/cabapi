@@ -73,5 +73,10 @@ public class DriverController {
 	public Iterable<Driver> getAllTrips(){
 		return driverService.findAll();
 	}
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email){
+		Driver driver = driverService.viewDriverDetailsByEmail(email);
+		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
+	}
 	
 }

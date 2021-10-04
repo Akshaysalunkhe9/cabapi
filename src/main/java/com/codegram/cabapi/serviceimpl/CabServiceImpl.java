@@ -18,8 +18,8 @@ public class CabServiceImpl implements CabService{
 	@Autowired
 	private CabRepository cabRepository;
 	
-	@Autowired
-	private DriverRepository driverRepository;
+//	@Autowired
+//	private DriverRepository driverRepository;
 	
 	@Override
 	public Cab saveCab(Cab cab) {

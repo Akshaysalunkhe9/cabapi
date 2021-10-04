@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.codegram.cabapi.domain.Cab;
 
 @Repository
-public interface CabRepository extends JpaRepository<Cab, Long> {
+public interface CabRepository extends JpaRepository<Cab, Integer> {
 	Cab findByCabId(int cabId);
-	
-	//List<Cab> viewCabsOfType(String carType);
+	//Cab findByCarType(String carType);
 }

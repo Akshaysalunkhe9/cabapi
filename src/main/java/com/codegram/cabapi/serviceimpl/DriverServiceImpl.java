@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.codegram.cabapi.exception.*;
 import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Driver;
 import com.codegram.cabapi.domain.TripBooking;
@@ -52,6 +52,18 @@ public class DriverServiceImpl implements DriverService {
 	public Iterable<Driver> findAll() {
 		return driverRepository.findAll();
 	}
-
+	@Override
+	public Driver viewDriverDetailsByEmail(String email) {
+		try {
+			Driver driver = driverRepository.findByEmail(email);
+			if(driver==null) {
+				throw new DriverIDException("Driver with "+driver.getDriverId()+"not Found");
+			}
+			return driver;
+		}
+		catch(Exception e) {
+			throw new DriverIDException("Driver with this email id not found");
+		}
+	}
 
 }

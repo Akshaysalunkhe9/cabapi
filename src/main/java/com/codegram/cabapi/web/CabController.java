@@ -60,12 +60,12 @@ public class CabController {
 		
 		
 		@GetMapping("/{cabId}")
-		public ResponseEntity<?> viewDriverById(@PathVariable int cabId){
+		public ResponseEntity<?> viewCabById(@PathVariable int cabId){
 			Cab viewcab=cabService.viewCabDetails(cabId);
 			return new ResponseEntity<Cab>(viewcab,HttpStatus.OK);
 		}
 		@DeleteMapping("/{cabId}")
-		public ResponseEntity<?> deleteDriverById(@PathVariable int cabId){
+		public ResponseEntity<?> deleteCabById(@PathVariable int cabId){
 			cabService.deleteCab(cabId);
 			return new ResponseEntity<String>("Customer with id '"+cabId+"' has been deleted successfully.",HttpStatus.OK);
 		}

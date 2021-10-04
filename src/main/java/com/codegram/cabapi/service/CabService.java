@@ -14,7 +14,6 @@ public interface CabService {
 		public Cab deleteCab(int cabId);
 		public Iterable<Cab> findAll();
 		public List<Cab> viewCabsOfType(String carType) throws Exception;
-		//public Cab viewCabsOfType(String carType);
 		public int countCabsOfType(String carType);
 		
 }

@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Cab;
-import com.codegram.cabapi.domain.Driver;
 import com.codegram.cabapi.exception.CabIDException;
 import com.codegram.cabapi.exception.CabTypeException;
 import com.codegram.cabapi.repository.CabRepository;
-import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.CabService;
 
 @Service
@@ -22,9 +20,6 @@ public class CabServiceImpl implements CabService{
 
 	@Autowired
 	private CabRepository cabRepository;
-	
-	@Autowired
-	private DriverRepository driverRepository;
 	
 	@PersistenceContext
 	EntityManager em;
@@ -46,12 +41,12 @@ public class CabServiceImpl implements CabService{
 	@Override
 	public Cab updateCab(Cab cab) {
 		
-		//Cab updateCab = cabRepository.findByCabId(cab.getCabId());
-		//if (updateCab != null) {
-		//	updateCab.setCarType(cab.getCarType());
-		//	updateCab.setPerKmRate(cab.getPerKmRate());
-		//	cabRepository.save(updateCab);
-		//}
+		Cab updateCab = cabRepository.findByCabId(cab.getCabId());
+		if (updateCab != null) {
+			updateCab.setCarType(cab.getCarType());
+			updateCab.setPerKmRate(cab.getPerKmRate());
+			cabRepository.save(updateCab);
+		}
 		return cabRepository.save(cab);
 	}
 

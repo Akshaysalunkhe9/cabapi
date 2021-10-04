@@ -40,13 +40,13 @@ public class Cab {
 			this.carType = carType;
 			this.perKmRate = perKmRate;
 		}
-
+		
 		public int getCabId() {
 			return cabId;
 		}
 
-		public void setCabId(int cabId) {
-			this.cabId = cabId;
+		public void setCabId(int Id) {
+			this.cabId = Id;
 		}
 
 		public String getCarType() {

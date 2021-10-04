@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return customerRepository.save(customer);
 		}
 		catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getCustomerId() +"Already Exists");
+			throw new CustomerIDException("Customer Id"+customer.getId() +"Already Exists");
 		}
 			
 		
@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer) {
 		try {
-			Customer updateCustomer = customerRepository.findByCustomerId(customer.getCustomerId());
+			Customer updateCustomer = customerRepository.findById(customer.getId());
 			if(updateCustomer==null) {
 				throw new Exception("Customer Id not Found");
 			}
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 			return customerRepository.save(updateCustomer);
 		}catch(Exception e) {
-			throw new CustomerIDException("Customer Id"+customer.getCustomerId() +"not found");
+			throw new CustomerIDException("Customer Id"+customer.getId() +"not found");
 		}
 		
 	}
@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer viewCustomerDetails(int customerId) {
 		// TODO Auto-generated method stub
 		try {
-			Customer viewCustomer = customerRepository.findByCustomerId(customerId);
+			Customer viewCustomer = customerRepository.findById(customerId);
 			if(viewCustomer==null) {
 				throw new Exception("Customer Id not Found");
 			}
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer deleteCustomer(int customerId) {
 		Customer customer=viewCustomerDetails(customerId);
 		customerRepository.delete(customer);
-		return customerRepository.findByCustomerId(customerId);
+		return customerRepository.findById(customerId);
 		
 	}
 
@@ -82,7 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
 		try {
 			Customer customer = customerRepository.findByEmail(email);
 			if(customer==null) {
-				throw new Exception("Customer with "+customer.getCustomerId()+"not Found");
+				throw new Exception("Customer with "+customer.getId()+"not Found");
 			}
 			return customer;
 		}

@@ -34,7 +34,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	@Override
 	public TripBooking insertTripBooking(TripBooking tripBooking, int customerId) {
 		try {
-			Customer customer = customerRepository.findByCustomerId(customerId);
+			Customer customer = customerRepository.findById(customerId);
 			tripBooking.setCustomer(customer);
 			tripBookingRepository.save(tripBooking);
 			return tripBooking;
@@ -67,16 +67,16 @@ public class TripBookingServiceImpl implements TripBookingService {
 
 	@Override
 	public List<TripBooking> viewAllTripsCustomer(int customerId) {
-		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
-		q.setParameter("customerId", customerId);
+		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
+		q.setParameter("id", customerId);
 		List<TripBooking> result = q.getResultList();
 		return result;
 	}
 
 	@Override
 	public float calculateBill(int customerId) {
-		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId", TripBooking.class);
-		q.setParameter("customerId", customerId);
+		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId", TripBooking.class);
+		q.setParameter("id", customerId);
 		List<TripBooking> list = q.getResultList();
 		Optional<Float> result = list.stream().map((tb) -> tb.getBill()).reduce((a,b) -> a+b);
 		return result.get();
@@ -84,7 +84,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 
 	@Override
 	public TripBooking viewTripById(int tripBookingId) {
-		TripBooking tripBooking = tripBookingRepository.findBytripBookingId(tripBookingId);
+		TripBooking tripBooking = tripBookingRepository.findById(tripBookingId);
 		if(tripBooking == null)
 			throw new TripBookingIDException("TripBooking ID :"+tripBookingId+" does not exist");
 		return tripBooking;

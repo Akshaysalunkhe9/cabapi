@@ -13,6 +13,6 @@ import com.codegram.cabapi.domain.TripBooking;
  */
 @Repository
 public interface TripBookingRepository extends JpaRepository<TripBooking, Integer> {
-	TripBooking findBytripBookingId(Integer tripBookingId);
+    TripBooking findById(int id);
 
 }

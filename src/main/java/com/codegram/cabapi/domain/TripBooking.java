@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class TripBooking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int tripBookingId;
+	private int id;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "customerId", nullable = false, updatable = false)
@@ -70,15 +70,18 @@ public class TripBooking {
 //		this.bill = bill;
 //	}
 
-	public int getTripBookingId() {
-		return tripBookingId;
-	}
-	public void setTripBookingId(int tripBookingId) {
-		this.tripBookingId = tripBookingId;
-	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}

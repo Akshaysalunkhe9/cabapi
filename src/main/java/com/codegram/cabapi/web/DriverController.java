@@ -68,5 +68,11 @@ public class DriverController {
 		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
 	}
 	
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email) throws Exception{
+		Driver driver=driverService.viewDriverDetailsByEmail(email);
+		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
+	}
+	
 }
 	

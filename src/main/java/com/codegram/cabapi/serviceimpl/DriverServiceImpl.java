@@ -26,7 +26,7 @@ public class DriverServiceImpl implements DriverService {
 	public List<Driver> viewBestDrivers() {
 		List<Driver> allDrivers=new ArrayList<>();
 		allDrivers=driverRepository.findAll();
-		List<Driver> bestDrivers=allDrivers.stream().filter(d->d.getRating()>4.5).collect(Collectors.toList());
+		List<Driver> bestDrivers=allDrivers.stream().filter(d->d.getRating()>=4.5).collect(Collectors.toList());
 		return bestDrivers;
 	}
 
@@ -43,5 +43,18 @@ public class DriverServiceImpl implements DriverService {
 		return driver;
 	}
 
+	@Override
+	public Driver viewDriverDetailsByEmail(String email) throws Exception {
+		try {
+			Driver driver = driverRepository.findByEmail(email);
+			if(driver==null) {
+				throw new Exception("Driver with "+driver.getDriverId()+"not Found");
+			}
+			return driver;
+		}
+		catch(Exception e) {
+			throw new Exception("Driver not found");
+		}
+	}
+	}
 
-}

@@ -9,5 +9,6 @@ import com.codegram.cabapi.domain.Driver;
 public interface DriverRepository extends JpaRepository<Driver, Long> {
 
 	Driver findByDriverId(Long driverId);
+	Driver findByEmail(String email);
 	
 }

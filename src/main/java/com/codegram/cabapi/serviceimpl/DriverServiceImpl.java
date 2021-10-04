@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.codegram.cabapi.exception.*;
 import com.codegram.cabapi.domain.Driver;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.DriverService;
+
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -19,7 +20,14 @@ public class DriverServiceImpl implements DriverService {
 	
 	@Override
 	public Driver saveOrUpdate(Driver driver) {
-			return driverRepository.save(driver);
+			try {
+				driver.setId(driver.getId());
+			    return driverRepository.save(driver);
+			}catch(Exception e)
+			{
+				throw new DriverIDException("Driver Id "+driver.getId()+" already exists");
+			}
+			
 		}
 
 	@Override
@@ -30,12 +38,19 @@ public class DriverServiceImpl implements DriverService {
 		return bestDrivers;
 	}
 
+	
 	@Override
 	public Driver viewDriverDetails(long driverId) {
-		Driver driver= driverRepository.findByDriverId(driverId);
+		Driver driver = driverRepository.findById(driverId);
+		if(driver==null)
+		{
+			throw new DriverIDException("Driver Id "+driverId+" does not exist");
+		}
 		return driver;
-	}
-
+		
+		}
+	
+	
 	@Override
 	public Driver deleteDriver(long driverId) {
 		Driver driver=viewDriverDetails(driverId);
@@ -44,17 +59,21 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	@Override
-	public Driver viewDriverDetailsByEmail(String email) throws Exception {
+	public Driver viewDriverDetailsByEmail(String email){
 		try {
 			Driver driver = driverRepository.findByEmail(email);
 			if(driver==null) {
-				throw new Exception("Driver with "+driver.getDriverId()+"not Found");
+				throw new DriverIDException("Driver with "+driver.getId()+" not Found");
 			}
 			return driver;
+		}catch(Exception e)
+		{
+			throw new DriverIDException("Driver not found with this email id");
 		}
-		catch(Exception e) {
-			throw new Exception("Driver not found");
 		}
+	
+		
 	}
-	}
+	
+	
 

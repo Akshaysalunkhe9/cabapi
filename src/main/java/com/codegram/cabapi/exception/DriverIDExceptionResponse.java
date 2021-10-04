@@ -2,20 +2,20 @@ package com.codegram.cabapi.exception;
 
 public class DriverIDExceptionResponse {
 
-private String driverIdentifier;
+public String Id;
 
 	
-	public DriverIDExceptionResponse(String driverIdentifier) {
+	public DriverIDExceptionResponse(String Id) {
 		super();
-		this.driverIdentifier = driverIdentifier;
+		this.Id = Id;
 	}
 	
-	public String getDriverIdentifier() {
-		return driverIdentifier;
+	public String Id() {
+		return Id;
 	}
 
-	public void setDriverIdentifier(String driverIdentifier) {
-		this.driverIdentifier = driverIdentifier;
+	public void setDriverId(String Id) {
+		this.Id = Id;
 	}
 	
 }

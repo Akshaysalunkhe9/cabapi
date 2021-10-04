@@ -45,9 +45,9 @@ public class DriverController {
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	
-	//List of all drivers
+	//Detail of a driver
 	@GetMapping("/{driverId}")
-	public ResponseEntity<?> viewDriverById(@PathVariable long driverId){
+	public ResponseEntity<?> viewDriverById(@PathVariable Long driverId){
 		Driver driver=driverService.viewDriverDetails(driverId);
 		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
 	}
@@ -69,10 +69,14 @@ public class DriverController {
 	}
 	
 	@GetMapping("email/{email}")
-	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email) throws Exception{
-		Driver driver=driverService.viewDriverDetailsByEmail(email);
+	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email){
+		Driver driver = driverService.viewDriverDetailsByEmail(email);
 		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
 	}
-	
+	/*@GetMapping("email/{email}")
+	public ResponseEntity<?> viewCustomerDetailsByEmail(@PathVariable String email){
+		Customer customer=customerService.viewCustomerDetailsByEmail(email);
+		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+	}*/
 }
 	

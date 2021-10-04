@@ -16,17 +16,17 @@ public class Driver extends AbstractUser{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long driverId;
+	private long Id;
 	
 	private float rating;
 	private long licenseNumber;
 	
-	public long getDriverId() {
-		return driverId;
+	public long getId() {
+		return Id;
 	}
 
-	public void setDriverId(long driverId) {
-		this.driverId = driverId;
+	public void setId(long Id) {
+		this.Id = Id;
 	}
 
 	public float getRating() {

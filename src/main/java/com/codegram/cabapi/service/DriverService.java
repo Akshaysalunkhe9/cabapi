@@ -18,6 +18,6 @@ public interface DriverService {
 	
 	public Driver deleteDriver(long driverId);
 	
-	public Driver viewDriverDetailsByEmail(String email) throws Exception;
+	public Driver viewDriverDetailsByEmail(String email);
 	
 }

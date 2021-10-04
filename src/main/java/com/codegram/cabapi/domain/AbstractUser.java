@@ -1,5 +1,6 @@
 package com.codegram.cabapi.domain;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class  AbstractUser {
 	private String mobileNumber;
 	
 	@NotBlank(message = "Provide an email id")
+	@Column(unique = true, updatable = false)
 	private String email;
 	
 	

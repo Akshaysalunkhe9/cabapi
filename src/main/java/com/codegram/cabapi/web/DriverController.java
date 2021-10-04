@@ -37,11 +37,11 @@ public class DriverController {
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 	
-	@PostMapping("")
-	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result){
+	@PostMapping("/{cabId}")
+	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result,@PathVariable int cabId){                                      
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		Driver savedDriver = driverService.saveOrUpdate(driver);
+		Driver savedDriver = driverService.saveOrUpdate(driver,cabId);
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	
@@ -66,6 +66,13 @@ public class DriverController {
 	public ResponseEntity<?> deleteDriverById(@PathVariable Long driverId){
 		driverService.deleteDriver(driverId);
 		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email) throws Exception{
+		Driver driver=driverService.viewDriverDetailsByEmail(email);
+		return new ResponseEntity<Driver>(driver,HttpStatus.OK);
 	}
 	
 }

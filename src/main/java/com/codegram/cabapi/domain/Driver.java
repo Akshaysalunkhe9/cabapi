@@ -1,10 +1,14 @@
 package com.codegram.cabapi.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * This driver class will be used to register driver
@@ -21,6 +25,12 @@ public class Driver extends AbstractUser{
 	private float rating;
 	private long licenseNumber;
 	
+	// One to one with cab
+		@OneToOne(fetch = FetchType.EAGER)
+		@JoinColumn(name="cab_id", nullable = false, updatable = false)
+		@JsonIgnore
+		private Cab cab;
+		
 	public long getDriverId() {
 		return driverId;
 	}
@@ -47,5 +57,13 @@ public class Driver extends AbstractUser{
 
 	public Driver() {
 		super();
+	}
+
+	public Cab getCab() {
+		return cab;
+	}
+
+	public void setCab(Cab cab) {
+		this.cab = cab;
 	}
 }

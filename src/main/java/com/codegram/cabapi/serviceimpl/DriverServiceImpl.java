@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Driver;
+import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.DriverService;
 
@@ -16,9 +18,17 @@ public class DriverServiceImpl implements DriverService {
 
 	@Autowired
 	private DriverRepository driverRepository; 
+	@Autowired
+	private CabRepository cabRepository;
 	
 	@Override
-	public Driver saveOrUpdate(Driver driver) {
+	public Driver saveOrUpdate(Driver driver,int cabId) {
+			
+			Cab cab = new Cab();
+			cab = cabRepository.findByCabId(cabId);
+			driver.setCab(cab);
+			
+			
 			return driverRepository.save(driver);
 		}
 
@@ -43,5 +53,18 @@ public class DriverServiceImpl implements DriverService {
 		return driver;
 	}
 
+	@Override
+	public Driver viewDriverDetailsByEmail(String email) throws Exception {
+		try {
+			Driver driver = driverRepository.findByEmail(email);
+			if(driver==null) {
+				throw new Exception("Driver with "+driver.getDriverId()+"not Found");
+			}
+			return driver;
+		}
+		catch(Exception e) {
+			throw new Exception("Driver not found");
+		}
+	}
 
 }

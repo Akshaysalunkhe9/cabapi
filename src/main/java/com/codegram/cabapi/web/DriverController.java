@@ -38,10 +38,10 @@ public class DriverController {
 	private MapValidationErrorService mapValidationErrorService;
 	
 	@PostMapping("/{cabId}")
-	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result,@PathVariable int cabId){                                      
+	public ResponseEntity<?> registerNewDriver(@Valid @RequestBody Driver driver, BindingResult result){                                      
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		Driver savedDriver = driverService.saveOrUpdate(driver,cabId);
+		Driver savedDriver = driverService.saveOrUpdate(driver);
 		return new ResponseEntity<Driver>(savedDriver,HttpStatus.CREATED);
 	}
 	

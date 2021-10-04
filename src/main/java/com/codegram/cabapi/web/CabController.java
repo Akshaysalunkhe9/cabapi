@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codegram.cabapi.domain.Cab;
+import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.service.CabService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
@@ -30,6 +32,7 @@ public class CabController {
 	
 		@Autowired
 		private MapValidationErrorService mapValidationErrorService;
+		
 		@PostMapping("")
 		public ResponseEntity<?> registerNewCab(@Valid @RequestBody Cab cab , BindingResult result){
 			ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -38,7 +41,7 @@ public class CabController {
 			return new ResponseEntity<Cab>(savedCab,HttpStatus.CREATED);
 		}
 	
-		@PatchMapping("/{cabId}")
+		@PutMapping("")
 		public ResponseEntity<?> updateCustomer(@Valid @RequestBody Cab cab , BindingResult result){
 			ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
 			if(errorMap!=null) return errorMap;
@@ -46,10 +49,20 @@ public class CabController {
 			return new ResponseEntity<Cab>(updateCab,HttpStatus.OK);
 		}
 		
+		/*
+		@PatchMapping("/{cabId}")
+		public ResponseEntity<?> updateCustomer(@Valid @RequestBody Cab cab , BindingResult result){
+			ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
+			if(errorMap!=null) return errorMap;
+			Cab	updateCab = cabService.updateCab(cab);
+			return new ResponseEntity<Cab>(updateCab,HttpStatus.OK);
+		}*/
+		
+		
 		@GetMapping("/{cabId}")
 		public ResponseEntity<?> viewDriverById(@PathVariable int cabId){
-			Cab deletecab=cabService.viewCabDetails(cabId);
-			return new ResponseEntity<Cab>(deletecab,HttpStatus.OK);
+			Cab viewcab=cabService.viewCabDetails(cabId);
+			return new ResponseEntity<Cab>(viewcab,HttpStatus.OK);
 		}
 		@DeleteMapping("/{cabId}")
 		public ResponseEntity<?> deleteDriverById(@PathVariable int cabId){
@@ -62,10 +75,10 @@ public class CabController {
 			return cabService.findAll();
 		}
 		
-		/*
-		@GetMapping(value = "type/{carType}")
-		public List<Cab> viewCabsOfType(String carType) {
+		
+		@GetMapping("/carType/{carType}")
+		public List<Cab> viewCabsOfType(@PathVariable String carType) throws Exception {
 			return cabService.viewCabsOfType(carType);
 		}
-		*/
+		
 }

@@ -26,19 +26,20 @@ public class Cab {
 		private String carType;
 		private float perKmRate;
 		
+		/*
 		@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cab")
 		private Driver driver;
-		
+		*/
 		public Cab() {
 			super();
 		}
 		
-		/*public Cab(int cabId, String carType, float perKmRate) {
+		public Cab(int cabId, String carType, float perKmRate) {
 			super();
 			this.cabId = cabId;
 			this.carType = carType;
 			this.perKmRate = perKmRate;
-		}*/
+		}
 
 		public int getCabId() {
 			return cabId;
@@ -64,6 +65,7 @@ public class Cab {
 			this.perKmRate = perKmRate;
 		}
 
+		/*
 		public Driver getDriver() {
 			return driver;
 		}
@@ -71,6 +73,6 @@ public class Cab {
 		public void setDriver(Driver driver) {
 			this.driver = driver;
 		}
-		
+		*/
 		
 }

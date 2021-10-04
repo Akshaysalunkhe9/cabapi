@@ -26,12 +26,13 @@ public class Driver extends AbstractUser{
 	private float rating;
 	private long licenseNumber;
 	
+	/*
 	// One to one with cab
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cab_id", nullable = false, updatable = false)
 	@JsonIgnore
 	private Cab cab;
-	
+	*/
 	public long getDriverId() {
 		return driverId;
 	}
@@ -60,6 +61,7 @@ public class Driver extends AbstractUser{
 		super();
 	}
 
+	/*
 	public Cab getCab() {
 		return cab;
 	}
@@ -67,5 +69,6 @@ public class Driver extends AbstractUser{
 	public void setCab(Cab cab) {
 		this.cab = cab;
 	}
+	*/
 	
 }

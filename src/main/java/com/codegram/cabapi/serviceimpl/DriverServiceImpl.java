@@ -23,12 +23,13 @@ public class DriverServiceImpl implements DriverService {
 	private CabRepository cabRepository;
 	
 	@Override
-	public Driver saveOrUpdate(Driver driver,int cabId) {
+	public Driver saveOrUpdate(Driver driver) {
 			
+		/*
 			Cab cab = new Cab();
 			cab = cabRepository.findByCabId(cabId);
 			driver.setCab(cab);
-			
+		*/
 			
 			return driverRepository.save(driver);
 		}

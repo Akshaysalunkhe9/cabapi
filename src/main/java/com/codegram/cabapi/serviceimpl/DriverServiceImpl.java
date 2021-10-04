@@ -38,7 +38,7 @@ public class DriverServiceImpl implements DriverService {
 
 	@Override
 	public Driver viewDriverDetails(int driverId) {
-		Driver driver= driverRepository.findByDriverId(driverId);
+		Driver driver= driverRepository.findById(driverId);
 		return driver;
 	}
 
@@ -57,7 +57,7 @@ public class DriverServiceImpl implements DriverService {
 		try {
 			Driver driver = driverRepository.findByEmail(email);
 			if(driver==null) {
-				throw new DriverIDException("Driver with "+driver.getDriverId()+"not Found");
+				throw new DriverIDException("Driver with "+driver.getId()+"not Found");
 			}
 			return driver;
 		}

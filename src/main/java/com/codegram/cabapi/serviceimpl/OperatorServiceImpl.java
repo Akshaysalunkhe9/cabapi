@@ -71,7 +71,7 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public Operator viewOperatorById(int operatorId) {
-		Operator operator = operatorRepository.findByoperatorId(operatorId);
+		Operator operator = operatorRepository.findById(operatorId);
 		if(operator == null)
 			throw new OperatorIDException("Operator ID :"+operatorId+" does not exist");
 		return operator;

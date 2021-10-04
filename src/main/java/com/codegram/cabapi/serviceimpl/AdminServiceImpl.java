@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public Admin viewAdminById(int adminId) {
-		Admin admin = adminRepository.findByadminId(adminId);
+		Admin admin = adminRepository.findById(adminId);
 		if(admin == null)
 			throw new AdminIDException("Admin ID :"+adminId+" does not exist");
 		return admin;
@@ -69,8 +69,8 @@ public class AdminServiceImpl implements AdminService {
    }
 		@Override
 		public List<TripBooking> viewAllTripsCustomer(int customerId) {
-			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
-			q.setParameter("customerId", customerId);
+			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
+			q.setParameter("id", customerId);
 			List<TripBooking> result = q.getResultList();
 			return result;
 }
@@ -88,7 +88,7 @@ public class AdminServiceImpl implements AdminService {
 		public List<TripBooking> getTripsCustomerwise() {
 			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
 			List<TripBooking> trips = q.getResultList();
-			trips = trips.stream().sorted((a, b) -> a.getCustomer().getCustomerId() - b.getCustomer().getCustomerId())
+			trips = trips.stream().sorted((a, b) -> a.getCustomer().getId() - b.getCustomer().getId())
 					.collect(Collectors.toList());
 			return trips;
 		}
@@ -96,7 +96,7 @@ public class AdminServiceImpl implements AdminService {
 		public List<TripBooking> getAllTripsForDays(int customerId, LocalDateTime fromDate, LocalDateTime toDate)
 			       {
 			TypedQuery<TripBooking> q = em.createQuery(
-					"select tb from TripBooking tb where tb.customer.customerId=:cId and tb.fromDateTime between :start and :end",
+					"select tb from TripBooking tb where tb.customer.id=:cId and tb.fromDateTime between :start and :end",
 					TripBooking.class);
 			q.setParameter("cId", customerId);
 			q.setParameter("start", fromDate);

@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Operator  extends AbstractUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer operatorId;
+	private int id;
 	/**
 	 * name for the project
 	 */
@@ -22,17 +22,13 @@ public class Operator  extends AbstractUser {
 	public Operator() {
 		super();
 	}
-
-	public Integer getOperatorId() {
-		return operatorId;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setOperatorId(Integer operatorId) {
-		this.operatorId = operatorId;
-	}
+	
 
-	public Operator(Integer operatorId) {
-		super();
-		this.operatorId = operatorId;
-	}
 }

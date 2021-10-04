@@ -16,7 +16,7 @@ import javax.persistence.Id;
 public class Admin  extends AbstractUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer adminId;
+	private int id;
 	/**
 	 * name for the project
 	 */
@@ -24,17 +24,12 @@ public class Admin  extends AbstractUser {
 	public Admin() {
 
 	}
-
-	public Integer getAdminId() {
-		return adminId;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
-	}
-
-	public Admin(Integer adminId) {
-		super();
-		this.adminId = adminId;
-	}
+	
 }

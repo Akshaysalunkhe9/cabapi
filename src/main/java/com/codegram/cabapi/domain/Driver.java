@@ -26,7 +26,7 @@ public class Driver extends AbstractUser{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int driverId;
+	private int id;
 	
 	private float rating;
 	private String licenseNumber;
@@ -36,12 +36,13 @@ public class Driver extends AbstractUser{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
 	private List<TripBooking> tripBooking =  new ArrayList<>();
 	
-	public int getDriverId() {
-		return driverId;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setDriverId(int driverId) {
-		this.driverId = driverId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public float getRating() {

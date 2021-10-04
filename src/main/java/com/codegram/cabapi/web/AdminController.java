@@ -82,7 +82,7 @@ public class AdminController {
 		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
 			return adminService.viewAllTripsCustomer(customerId);
 }
-	@GetMapping("datewise")
+	@GetMapping("/datewise")
 	public List<TripBooking> viewTripsDateWise(){
        return adminService.viewTripsDateWise();
 	}

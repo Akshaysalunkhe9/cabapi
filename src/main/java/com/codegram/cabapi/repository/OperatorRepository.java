@@ -14,9 +14,8 @@ import com.codegram.cabapi.domain.Operator;
  */
 @Repository
 public interface OperatorRepository extends JpaRepository<Operator, Integer> {
-	Operator findByOperatorId(Integer operatorId);
 
-	Operator findByoperatorId(int operatorId);
+	Operator findById(int operatorId);
 	
 	//Admin findByEmail(String email);
 

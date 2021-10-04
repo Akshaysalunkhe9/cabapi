@@ -17,7 +17,7 @@ public class Customer extends AbstractUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customerId;
+	private int id;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
 	private List<TripBooking> tripBooking =  new ArrayList<>();
@@ -25,15 +25,18 @@ public class Customer extends AbstractUser {
 	public Customer() {
 		super();
 	}
-	
 
-	public int getCustomerId() {
-		return customerId;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+
 
 
 	public List<TripBooking> getTripBooking() {

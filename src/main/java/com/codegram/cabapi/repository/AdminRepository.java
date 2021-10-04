@@ -13,9 +13,9 @@ import com.codegram.cabapi.domain.Admin;
  */
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
-	Admin findByAdminId(Integer adminId);
+	
 
-	Admin findByadminId(int adminId);
+	Admin findById(int adminId);
 	
 	Admin findByEmail(String email);
 

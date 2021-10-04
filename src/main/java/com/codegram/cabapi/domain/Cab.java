@@ -29,7 +29,7 @@ public class Cab {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int cabId;
+		private int id;
 		private String carType;
 		private float perKmRate;
 		
@@ -52,16 +52,18 @@ public class Cab {
 			this.perKmRate = perKmRate;
 		}*/
 
-		public int getCabId() {
-			return cabId;
-		}
-
-		public void setCabId(int cabId) {
-			this.cabId = cabId;
-		}
+		
 
 		public String getCarType() {
 			return carType;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
 		}
 
 		public void setCarType(String carType) {

@@ -33,7 +33,7 @@ public class CabServiceImpl implements CabService{
 	@Override
 	public Cab updateCab(Cab cab) {
 		
-		Cab updateCab = cabRepository.findByCabId(cab.getCabId());
+		Cab updateCab = cabRepository.findById(cab.getId());
 		if (updateCab != null) {
 			updateCab.setCarType(cab.getCarType());
 			updateCab.setPerKmRate(cab.getPerKmRate());
@@ -44,7 +44,7 @@ public class CabServiceImpl implements CabService{
 
 	@Override
 	public Cab viewCabDetails(int cabId) {
-		Cab viewCab = cabRepository.findByCabId(cabId);	
+		Cab viewCab = cabRepository.findById(cabId);	
 		return viewCab;
 		
 	}	

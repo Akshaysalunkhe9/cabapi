@@ -100,4 +100,10 @@ public class OperatorServiceImpl implements OperatorService {
 		Long result = q.getSingleResult();
 		return result;
 	}
+	@Override
+	public Long totalIncome() {
+		TypedQuery<Long> q = em.createQuery("select SUM(bill) from TripBooking", Long.class);
+		Long result = q.getSingleResult();
+		return result;
+	}
 }

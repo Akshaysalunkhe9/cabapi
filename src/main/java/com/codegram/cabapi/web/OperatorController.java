@@ -80,5 +80,10 @@ public class OperatorController {
 			Long operator = operatorService.totalCabsPresent();
 			return new ResponseEntity<Long>(operator, HttpStatus.OK);
 		}
+		@GetMapping("/income")
+		public ResponseEntity<?> getTotalIncome(){
+			Long operator = operatorService.totalIncome();
+			return new ResponseEntity<Long>(operator, HttpStatus.OK);
+		}
 		
 }

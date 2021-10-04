@@ -31,6 +31,6 @@ public interface OperatorService {
 	public Long totalCustomersPresent();
 	public Long totalDriversPresent();
 	public Long totalCabsPresent();
-
+	public Long totalIncome();
 
 	}

@@ -5,11 +5,15 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
+import com.codegram.cabapi.domain.Cab;
+import com.codegram.cabapi.domain.Customer;
+import com.codegram.cabapi.domain.Driver;
 
 //import com.codegram.cabapi.domain.TripBooking;
 
 //import com.codegram.cabapi.domain.Customer;
 import com.codegram.cabapi.domain.Operator;
+import com.codegram.cabapi.domain.TripBooking;
 
 import java.util.List;
 
@@ -23,11 +27,10 @@ public interface OperatorService {
 	
 	public Operator viewOperatorById(int operatorId);
 	
-	//public Admin viewAdminDetailsByEmail(String email);
-	
-	//public List<TripBooking> viewAllTripsCustomer(int customerId);
-	
-	//public List<TripBooking> viewTripsDateWise();
+	public Long totalTripsTaken();
+	public Long totalCustomersPresent();
+	public Long totalDriversPresent();
+	public Long totalCabsPresent();
 
 
 	}

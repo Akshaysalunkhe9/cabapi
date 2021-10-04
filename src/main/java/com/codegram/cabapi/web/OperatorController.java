@@ -59,7 +59,26 @@ public class OperatorController {
 		public ResponseEntity<?> getAdminById(@PathVariable Integer operatorId){
 			Operator operator = operatorService.viewOperatorById(operatorId);
 			return new ResponseEntity<Operator>(operator, HttpStatus.OK);
+		}
+		@GetMapping("/trips")
+		public ResponseEntity<?> getTotalTrips(){
+			Long operator = operatorService.totalTripsTaken();
+			return new ResponseEntity<Long>(operator, HttpStatus.OK);
+		}
+		@GetMapping("/customers")
+		public ResponseEntity<?> getTotalCustomers(){
+			Long operator = operatorService.totalCustomersPresent();
+			return new ResponseEntity<Long>(operator, HttpStatus.OK);
+		}
+		@GetMapping("/drivers")
+		public ResponseEntity<?> getTotalDrivers(){
+			Long operator = operatorService.totalDriversPresent();
+			return new ResponseEntity<Long>(operator, HttpStatus.OK);
+		}
+		@GetMapping("/cabs")
+		public ResponseEntity<?> getTotalCabs(){
+			Long operator = operatorService.totalCabsPresent();
+			return new ResponseEntity<Long>(operator, HttpStatus.OK);
+		}
 		
-		
-	}
 }

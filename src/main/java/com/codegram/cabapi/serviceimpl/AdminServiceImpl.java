@@ -1,6 +1,5 @@
 package com.codegram.cabapi.serviceimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -23,11 +22,12 @@ import com.codegram.cabapi.domain.Customer;
 import java.util.stream.Collectors;
 
 
-
 /**
+ * This AdminServiceImplementation  will implement all the methods from the AdminService Interface
  * @author Aniket
  *
  */
+
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
@@ -35,6 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	@PersistenceContext
 	EntityManager em;
 
+	
 	@Override
 	public Admin insertAdmin(Admin admin) {
 		// TODO Auto-generated method stub
@@ -42,12 +43,15 @@ public class AdminServiceImpl implements AdminService {
 		return admin;
 	}
 
+	
+	
 	@Override
 	public Admin updateAdmin(Admin admin) {
 		// TODO Auto-generated method stub
 		return adminRepository.save(admin);
 	}
-
+	
+	
 	@Override
 	public Iterable<Admin> deleteAdmin(int adminId) {
 		// TODO Auto-generated method stub
@@ -56,6 +60,7 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 	
+	
 	@Override
 	public Admin viewAdminById(int adminId) {
 		Admin admin = adminRepository.findById(adminId);
@@ -63,22 +68,24 @@ public class AdminServiceImpl implements AdminService {
 			throw new AdminIDException("Admin ID :"+adminId+" does not exist");
 		return admin;
 	}
-		
+	
+	
 		@Override
 		public Admin viewAdminDetailsByEmail(String email) {
 			Admin admin = adminRepository.findByEmail(email);
 			return admin;
 	
    }
+		
+		
 		@Override
-		public List<TripBooking> viewAllTripsCustomer(int customerId) {
-			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
-			q.setParameter("id", customerId);
-			List<TripBooking> result = q.getResultList();
-			return result;
-}
-
-		@Override
+		public Admin viewAdminDetailsByUsername(String username) {
+			Admin admin = adminRepository.findByUsername(username);
+			return admin;
+	
+   }
+		
+	    @Override
 		public List<TripBooking> viewTripsDateWise() {
 			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
 			List<TripBooking> trips = q.getResultList();
@@ -87,6 +94,9 @@ public class AdminServiceImpl implements AdminService {
 			return trips;
 			
 		}
+	    
+	   
+	    
 		@Override
 		public List<TripBooking> getTripsCustomerwise() {
 			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
@@ -95,17 +105,32 @@ public class AdminServiceImpl implements AdminService {
 					.collect(Collectors.toList());
 			return trips;
 		}
+		
+		
+		
 		@Override
-		public List<TripBooking> getAllTripsForDays(int customerId, LocalDateTime fromDate, LocalDateTime toDate)
-			       {
-			TypedQuery<TripBooking> q = em.createQuery(
-					"select tb from TripBooking tb where tb.customer.id=:cId and tb.fromDateTime between :start and :end",
-					TripBooking.class);
-			q.setParameter("cId", customerId);
-			q.setParameter("start", fromDate);
-			q.setParameter("end", toDate);
-			List<TripBooking> trips = q.getResultList();
-			return trips;
+		public Long totalTripsTaken() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from TripBooking", Long.class);
+			Long result = q.getSingleResult();
+			return result;
+		}
+		
+		
+		
+		@Override
+		public Long totalCustomersPresent() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from Customer", Long.class);
+			Long result = q.getSingleResult();
+			return result;
+		}
+		
+		
+		
+		@Override
+		public Long totalDriversPresent() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from Driver", Long.class);
+			Long result = q.getSingleResult();
+			return result;
 		}
 		
 

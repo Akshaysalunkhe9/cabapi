@@ -64,14 +64,22 @@ public interface AdminService extends UserDetailsService{
 	 */
 	
 	public Admin viewAdminDetailsByEmail(String email);
-	/**
-	 * This method will view the TripsBooking details customerwise. 
-	 * @param Customerwise will be given
-	 * @return  TripBooking details by the customerwise.
-	 */
-	public List<TripBooking> viewAllTripsCustomer(int customerId);
 	
+	/**
+	 * This method will view the admin details by his username. 
+	 * @param admin username will be given
+	 * @return admin details by the username.
+	 */
+	
+	public Admin viewAdminDetailsByUsername(String username);
+	
+	/**
+	 * This method will view the TripsBooking details datewise. 
+	 * @param Datewise will be given
+	 * @return  TripsBooking details by the Datewise.
+	 */
 	public List<TripBooking> viewTripsDateWise();
+	
 	/**
 	 * This method will view the TripsBooking details customerwise. 
 	 * @param Customerwise will be given
@@ -79,7 +87,29 @@ public interface AdminService extends UserDetailsService{
 	 */
 	public List<TripBooking> getTripsCustomerwise();
 	
-	public List<TripBooking> getAllTripsForDays(int customerId, LocalDateTime fromDate, LocalDateTime toDate);
-
+	/**
+	 * This method will view all the Trips taken by customers. 
+	 * @param trips will be given
+	 * @return  totaltripstaken details.
+	 */
+	public Long totalTripsTaken();
+	
+	
+	/**
+	 * This method will view all thecustomers. 
+	 * @param customers will be given
+	 * @return  totalCustomers details.
+	 */
+	
+	public Long totalCustomersPresent();
+	
+	/**
+	 * This view method will display the totalDrivers details. 
+	 * @param driver will be given
+	 * @return total number of drivers.
+	 */
+	public Long totalDriversPresent();
+	
+//	public float totalIncome();
 
 	}

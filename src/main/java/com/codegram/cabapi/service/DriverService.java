@@ -9,16 +9,16 @@ import com.codegram.cabapi.domain.Driver;
 public interface DriverService {
 
 	/**
-	 * This view method will display the customer details with his id. 
+	 * This view method will save or register the driver and  update details with his id. 
 	 * @param driver id will be given
-	 * @return customer inserted or update.
+	 * @return driver inserted or update.
 	 */
 	public Driver saveOrUpdate(Driver driver);
 	
 	/**
 	 * This  method will list the best drivers with ratings>=4.5. 
-	 * @param customer  id will be given
-	 * @return customer deleted by the id.
+	 * @param driver will be given
+	 * @return driver list who have rating more than 4.5.
 	 */
 	public List<Driver> viewBestDrivers();
 	

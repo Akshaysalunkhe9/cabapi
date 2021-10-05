@@ -25,7 +25,7 @@ public interface AdminService {
 	
 	public Admin viewAdminDetailsByEmail(String email);
 	
-	public List<TripBooking> viewAllTripsCustomer(int customerId);
+	public Admin viewAdminDetailsByUsername(String username);
 	
 	public List<TripBooking> viewTripsDateWise();
 	
@@ -36,5 +36,7 @@ public interface AdminService {
 	public Long totalCustomersPresent();
 	
 	public Long totalDriversPresent();
+	
+//	public float totalIncome();
 
 	}

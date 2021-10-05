@@ -67,15 +67,16 @@ public class AdminServiceImpl implements AdminService {
 			return admin;
 	
    }
+	
 		@Override
-		public List<TripBooking> viewAllTripsCustomer(int customerId) {
-			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
-			q.setParameter("id", customerId);
-			List<TripBooking> result = q.getResultList();
-			return result;
-}
-
-		@Override
+		public Admin viewAdminDetailsByUsername(String username) {
+			Admin admin = adminRepository.findByUsername(username);
+			return admin;
+	
+   }
+	
+		
+	    @Override
 		public List<TripBooking> viewTripsDateWise() {
 			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
 			List<TripBooking> trips = q.getResultList();
@@ -111,6 +112,17 @@ public class AdminServiceImpl implements AdminService {
 			Long result = q.getSingleResult();
 			return result;
 		}
-
+		
+//		@Override
+//		public float totalIncome() {
+////			TypedQuery<Float> q = em.createQuery("select SUM(tb.bill) from TripBooking tb", Float.class);
+////			Float result = q.getSingleResult();
+////			return 0;
+//			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
+//			List<TripBooking> list = q.getResultList();
+//			Optional<Float> result = list.stream().map((tb) -> tb.getBill()).reduce((a,b) -> a+b);
+//			return result.get();
+//		}
+		
 
 }

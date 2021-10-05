@@ -77,11 +77,12 @@ public class AdminController {
 		Admin admin=adminService.viewAdminDetailsByEmail(email);
 		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
 	}
+	@GetMapping("username/{username}")
+	public ResponseEntity<?> viewAdminDetailsByUsername(@PathVariable String username){
+		Admin admin=adminService.viewAdminDetailsByUsername(username);
+		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
+	}
 	
-	@GetMapping("/customer/{customerId}")
-		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
-			return adminService.viewAllTripsCustomer(customerId);
-}
 	@GetMapping("/datewise")
 	public List<TripBooking> viewTripsDateWise(){
        return adminService.viewTripsDateWise();
@@ -106,5 +107,12 @@ public class AdminController {
 		Long operator = adminService.totalDriversPresent();
 		return new ResponseEntity<Long>(operator, HttpStatus.OK);
 	}
-
+	
+//	@GetMapping("/income")
+//	public float getTotalIncome(){
+////		float operator = operatorService.totalIncome();
+////		return new ResponseEntity<Float>(operator, HttpStatus.OK);
+//		return operatorService.totalIncome();
+//	}
+	
 }

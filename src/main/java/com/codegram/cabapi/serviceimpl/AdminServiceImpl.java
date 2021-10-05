@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public Admin viewAdminById(int adminId) {
-		Admin admin = adminRepository.findByadminId(adminId);
+		Admin admin = adminRepository.findById(adminId);
 		if(admin == null)
 			throw new AdminIDException("Admin ID :"+adminId+" does not exist");
 		return admin;
@@ -69,8 +69,8 @@ public class AdminServiceImpl implements AdminService {
    }
 		@Override
 		public List<TripBooking> viewAllTripsCustomer(int customerId) {
-			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.customerId=:customerId",TripBooking.class);
-			q.setParameter("customerId", customerId);
+			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
+			q.setParameter("id", customerId);
 			List<TripBooking> result = q.getResultList();
 			return result;
 }
@@ -88,21 +88,29 @@ public class AdminServiceImpl implements AdminService {
 		public List<TripBooking> getTripsCustomerwise() {
 			TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb", TripBooking.class);
 			List<TripBooking> trips = q.getResultList();
-			trips = trips.stream().sorted((a, b) -> a.getCustomer().getCustomerId() - b.getCustomer().getCustomerId())
+			trips = trips.stream().sorted((a, b) -> a.getCustomer().getId() - b.getCustomer().getId())
 					.collect(Collectors.toList());
 			return trips;
 		}
+		
 		@Override
-		public List<TripBooking> getAllTripsForDays(int customerId, LocalDateTime fromDate, LocalDateTime toDate)
-			       {
-			TypedQuery<TripBooking> q = em.createQuery(
-					"select tb from TripBooking tb where tb.customer.customerId=:cId and tb.fromDateTime between :start and :end",
-					TripBooking.class);
-			q.setParameter("cId", customerId);
-			q.setParameter("start", fromDate);
-			q.setParameter("end", toDate);
-			List<TripBooking> trips = q.getResultList();
-			return trips;
+		public Long totalTripsTaken() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from TripBooking", Long.class);
+			Long result = q.getSingleResult();
+			return result;
 		}
+		@Override
+		public Long totalCustomersPresent() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from Customer", Long.class);
+			Long result = q.getSingleResult();
+			return result;
+		}
+		@Override
+		public Long totalDriversPresent() {
+			TypedQuery<Long> q = em.createQuery("select COUNT(*) from Driver", Long.class);
+			Long result = q.getSingleResult();
+			return result;
+		}
+
 
 }

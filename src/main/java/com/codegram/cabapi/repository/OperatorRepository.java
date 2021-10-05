@@ -4,16 +4,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.codegram.cabapi.domain.TripBooking;
+
+import com.codegram.cabapi.domain.Operator;
 
 
 /**
- * @author Arnav
+ * @author Anand
  *
  */
 @Repository
-public interface TripBookingRepository extends JpaRepository<TripBooking, Integer> {
-    TripBooking findById(int id);
- 
+public interface OperatorRepository extends JpaRepository<Operator, Integer> {
+	
+
+	Operator findById(int operatorId);
+	
+	//Admin findByEmail(String email);
 
 }

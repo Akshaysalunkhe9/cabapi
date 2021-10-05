@@ -1,8 +1,7 @@
 package com.codegram.cabapi.web;
 
-import java.util.List;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -61,45 +60,51 @@ public class AdminController {
 		Admin updation = adminService.updateAdmin(admin);
 		return new ResponseEntity<Admin>(updation, HttpStatus.OK);
 	}
-		@DeleteMapping("/{adminId}")
-		public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
-			adminService.deleteAdmin(adminId);
-			return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
-		}
 	
-		@GetMapping("/{adminId}")
-		public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
-			Admin admin = adminService.viewAdminById(adminId);
-			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
-		
-		
+	@DeleteMapping("/{adminId}")
+	public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
+		adminService.deleteAdmin(adminId);
+		return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
 	}
-		@GetMapping("email/{email}")
-		public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
-			Admin admin=adminService.viewAdminDetailsByEmail(email);
-			return new ResponseEntity<Admin>(admin,HttpStatus.OK);
-		}
-		
-		@GetMapping("customers/{customerId}")
+
+	@GetMapping("/{adminId}")
+	public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
+		Admin admin = adminService.viewAdminById(adminId);
+		return new ResponseEntity<Admin>(admin, HttpStatus.OK);	
+	}
+	@GetMapping("email/{email}")
+	public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
+		Admin admin=adminService.viewAdminDetailsByEmail(email);
+		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
+	}
+	
+	@GetMapping("/customer/{customerId}")
 		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
 			return adminService.viewAllTripsCustomer(customerId);
 }
-		@GetMapping("datewise")
-		public List<TripBooking> viewTripsDateWise(){
-           return adminService.viewTripsDateWise();
-		}
-		
-		@GetMapping("/customerwise")
-		public List<TripBooking> getTripsCustomerwise() {
-			return adminService.getTripsCustomerwise();
-		}
-		
-		@GetMapping("fordays/{customerId}/{fromDate}/{toDate}")
-		public List<TripBooking> getAllTripsForDays(@PathVariable("customerId") int customerId,
-				@PathVariable("fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
-				@PathVariable("toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate)
-			 {
-			return adminService.getAllTripsForDays(customerId, fromDate, toDate);
-		}
+	@GetMapping("/datewise")
+	public List<TripBooking> viewTripsDateWise(){
+       return adminService.viewTripsDateWise();
+	}
+	@GetMapping("/customerwise")
+	public List<TripBooking> getTripsCustomerwise() {
+		return adminService.getTripsCustomerwise();
+	}
+	
+	@GetMapping("/trips")
+	public ResponseEntity<?> getTotalTrips(){
+		Long operator = adminService.totalTripsTaken();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
+	}
+	@GetMapping("/customers")
+	public ResponseEntity<?> getTotalCustomers(){
+		Long operator = adminService.totalCustomersPresent();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
+	}
+	@GetMapping("/drivers")
+	public ResponseEntity<?> getTotalDrivers(){
+		Long operator = adminService.totalDriversPresent();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
+	}
 
 }

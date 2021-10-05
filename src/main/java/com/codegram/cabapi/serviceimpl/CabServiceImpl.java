@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.Driver;
 import com.codegram.cabapi.exception.CabIDException;
+import com.codegram.cabapi.exception.CustomerIDException;
 import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.CabService;
@@ -51,8 +52,17 @@ public class CabServiceImpl implements CabService{
 
 	@Override
 	public Cab viewCabDetails(int cabId) {
-		Cab viewCab = cabRepository.findById(cabId);	
-		return viewCab;
+		
+		
+		try {
+			Cab viewCab = cabRepository.findById(cabId);	
+			if(viewCab==null) {
+				throw new Exception("Cab Id not Found");
+			}
+			return viewCab;
+		}catch(Exception e) {
+			throw new CustomerIDException("Cab Id "+cabId +" not found");
+		}
 		
 	}	
 	

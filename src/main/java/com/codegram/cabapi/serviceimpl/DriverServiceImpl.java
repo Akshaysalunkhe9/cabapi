@@ -39,6 +39,10 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public Driver viewDriverDetails(int driverId) {
 		Driver driver= driverRepository.findById(driverId);
+		if(driver==null)
+		{
+			throw new DriverIDException("Driver Id "+driverId+" does not exist");
+		}
 		return driver;
 	}
 

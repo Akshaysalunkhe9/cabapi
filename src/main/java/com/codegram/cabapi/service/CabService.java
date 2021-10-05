@@ -12,7 +12,7 @@ public interface CabService {
 		public Cab viewCabDetails(int cabId);
 		public Cab deleteCab(int cabId);
 		public Iterable<Cab> findAll();
-		//public List<Cab> viewCabsOfType(String carType);
-		public int countCabsOfType(String carType);
+		public List<Cab> viewCabsOfType(String carType);
+		
 		
 }

@@ -2,6 +2,10 @@ package com.codegram.cabapi.serviceimpl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,9 @@ public class CabServiceImpl implements CabService{
 	
 //	@Autowired
 //	private DriverRepository driverRepository;
+	
+	@PersistenceContext
+	EntityManager em;
 	
 	@Override
 	public Cab saveCab(Cab cab) {
@@ -61,26 +68,17 @@ public class CabServiceImpl implements CabService{
 		return cabRepository.findAll();
 	}
 	
-	/*
+	
 	@Override
 	public List<Cab> viewCabsOfType(String carType) {
 		
-		return cabRepository.viewCabsOfType(carType);
+		List<Cab> viewCab = cabRepository.findByCarType(carType);
+		TypedQuery<Cab> q = em.createQuery("select cb from Cab cb where carType = :carType", Cab.class);
+		q.setParameter("carType", carType);
+		q.getResultList();
+		return q.getResultList();
 	}
-	*/
-
-	@Override
-	public int countCabsOfType(String carType) {
-		
-		return 0;
-	}
-
 	
 
-	
-
-	
-
-	
 
 }

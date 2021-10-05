@@ -47,12 +47,12 @@ public class CabController {
 		}
 		
 		@GetMapping("/{cabId}")
-		public ResponseEntity<?> viewDriverById(@PathVariable int cabId){
+		public ResponseEntity<?> viewCabById(@PathVariable int cabId){
 			Cab deletecab=cabService.viewCabDetails(cabId);
 			return new ResponseEntity<Cab>(deletecab,HttpStatus.OK);
 		}
 		@DeleteMapping("/{cabId}")
-		public ResponseEntity<?> deleteDriverById(@PathVariable int cabId){
+		public ResponseEntity<?> deleteCabById(@PathVariable int cabId){
 			cabService.deleteCab(cabId);
 			return new ResponseEntity<String>("Customer with id '"+cabId+"' has been deleted successfully.",HttpStatus.OK);
 		}
@@ -62,10 +62,8 @@ public class CabController {
 			return cabService.findAll();
 		}
 		
-		/*
-		@GetMapping(value = "type/{carType}")
-		public List<Cab> viewCabsOfType(String carType) {
+		@GetMapping("/carType/{carType}")
+		public List<Cab> viewCabsOfType(@PathVariable String carType) throws Exception {
 			return cabService.viewCabsOfType(carType);
 		}
-		*/
 }

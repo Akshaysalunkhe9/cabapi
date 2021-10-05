@@ -10,5 +10,5 @@ import com.codegram.cabapi.domain.Cab;
 @Repository
 public interface CabRepository extends JpaRepository<Cab, Integer> {
 	Cab findById(int cabId);
-	//Cab findByCarType(String carType);
+	List<Cab> findByCarType(String carType);
 }

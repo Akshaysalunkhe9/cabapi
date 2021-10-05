@@ -63,7 +63,9 @@ public class OperatorServiceImpl implements OperatorService {
 	@Override
 	public Iterable<Operator> deleteOperator(int operatorId) {
 		// TODO Auto-generated method stub
-		operatorRepository.deleteById(operatorId);
+		Operator operator= viewOperatorById(operatorId);
+		operatorRepository.delete(operator);
+		
 		return operatorRepository.findAll();
 
 	}

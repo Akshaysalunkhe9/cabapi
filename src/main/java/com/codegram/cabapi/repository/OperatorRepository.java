@@ -14,6 +14,7 @@ import com.codegram.cabapi.domain.Operator;
  */
 @Repository
 public interface OperatorRepository extends JpaRepository<Operator, Integer> {
+	
 
 	Operator findById(int operatorId);
 	

@@ -1,5 +1,6 @@
 package com.codegram.cabapi.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -9,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
@@ -103,6 +106,18 @@ public class AdminServiceImpl implements AdminService {
 			q.setParameter("end", toDate);
 			List<TripBooking> trips = q.getResultList();
 			return trips;
+		}
+		
+
+		@Override
+		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+			// TODO Auto-generated method stub
+			Admin admin = adminRepository.findByEmail(email);
+			if(admin == null)
+				throw new UsernameNotFoundException("Admin not found");
+			//return new Admin(admin.getEmail(), admin.getPassword(), new ArrayList<>());
+			//return new AdminPrincipal(admin);
+			return admin;
 		}
 
 

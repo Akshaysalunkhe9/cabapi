@@ -62,10 +62,10 @@ public class CabController {
 			return cabService.findAll();
 		}
 		
-		/*
+		
 		@GetMapping(value = "type/{carType}")
-		public List<Cab> viewCabsOfType(String carType) {
+		public List<Cab> viewCabsOfType(@PathVariable String carType) throws Exception {
 			return cabService.viewCabsOfType(carType);
 		}
-		*/
+		
 }

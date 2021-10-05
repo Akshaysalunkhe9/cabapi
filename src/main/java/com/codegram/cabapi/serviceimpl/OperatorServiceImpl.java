@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codegram.cabapi.exception.CustomerIDException;
 import com.codegram.cabapi.exception.OperatorIDException;
 import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.CustomerRepository;
@@ -19,6 +20,7 @@ import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.repository.OperatorRepository;
 import com.codegram.cabapi.repository.TripBookingRepository;
 import com.codegram.cabapi.service.OperatorService;
+import com.codegram.cabapi.domain.Customer;
 //import com.codegram.cabapi.domain.TripBooking;
 //import com.codegram.cabapi.domain.Customer;
 import com.codegram.cabapi.domain.Operator;
@@ -49,22 +51,44 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Override
 	public Operator insertOperator(Operator operator) {
-		// TODO Auto-generated method stub
-		 operatorRepository.save(operator);
-		return operator;
+//		// TODO Auto-generated method stub
+//		 operatorRepository.save(operator);
+//		return operator;
+		try {
+			return operatorRepository.save(operator);
+		}
+		catch(Exception e) {
+			throw new OperatorIDException("Operator Id"+operator.getId() +"Already Exists");
+		}
 	}
 
 	@Override
 	public Operator updateOperator(Operator operator) {
-		// TODO Auto-generated method stub
-		return operatorRepository.save(operator);
+//		// TODO Auto-generated method stub
+//		return operatorRepository.save(operator);
+		try {
+			Operator updateOperator = operatorRepository.findById(operator.getId());
+			if(updateOperator==null) {
+				throw new Exception("Customer Id not Found");
+			}
+			if(updateOperator!=null) {
+				updateOperator.setEmail(operator.getEmail());
+				updateOperator.setAddress(operator.getAddress());
+				updateOperator.setMobileNumber(operator.getMobileNumber());
+				updateOperator.setPassword(operator.getPassword());
+				updateOperator.setUsername(operator.getUsername());
+			}
+			return operatorRepository.save(updateOperator);
+		}catch(Exception e) {
+			throw new CustomerIDException("Operator Id"+operator.getId() +"not found");
+		}
 	}
 
 	@Override
-	public Iterable<Operator> deleteOperator(int operatorId) {
-		// TODO Auto-generated method stub
-		operatorRepository.deleteById(operatorId);
-		return operatorRepository.findAll();
+	public Operator deleteOperator(int operatorId) {
+		Operator operator=viewOperatorById(operatorId);
+		operatorRepository.delete(operator);
+		return operatorRepository.findById(operatorId);
 
 	}
 

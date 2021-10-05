@@ -19,18 +19,36 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
+ * 
+ * This Project Class is a domain, which represents data and it will be moving
+ * layer to layer.
+ * 
  * entity for Cap
  * @author Abhijit 
+ *
+ *
+ *
  *
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cab {
 
+		/**
+		 * id of the Cab  and auto generated
+		 */
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
+		
+		/**
+		 * carType of the Cab
+		 */
 		private String carType;
+		
+		/**
+		 * rate per km of the Cab
+		 */
 		private float perKmRate;
 		
 //		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
@@ -38,6 +56,8 @@ public class Cab {
 //		@JsonIgnore
 //		private Driver driver;
 		
+		
+		//One to Many between Tripbooking and Cab
 		@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cab")
 		private List<TripBooking> tripBooking =  new ArrayList<>();
 		

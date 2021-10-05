@@ -85,7 +85,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	@Override
 	public List<TripBooking> viewAllTripsCustomer(int customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId",TripBooking.class);
-		q.setParameter("id", customerId);
+		q.setParameter("customerId", customerId);
 		List<TripBooking> result = q.getResultList();
 		return result;
 	}
@@ -93,7 +93,7 @@ public class TripBookingServiceImpl implements TripBookingService {
 	@Override
 	public float calculateTotalBill(int customerId) {
 		TypedQuery<TripBooking> q = em.createQuery("select tb from TripBooking tb where tb.customer.id=:customerId", TripBooking.class);
-		q.setParameter("id", customerId);
+		q.setParameter("customerId", customerId);
 		List<TripBooking> list = q.getResultList();
 		Optional<Float> result = list.stream().map((tb) -> tb.getBill()).reduce((a,b) -> a+b);
 		return result.get();

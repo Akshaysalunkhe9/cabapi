@@ -1,3 +1,4 @@
+   
 package com.codegram.cabapi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,11 +9,12 @@ import com.codegram.cabapi.domain.TripBooking;
 
 
 /**
- * @author Arnav
- *
+ * Admin Arnav
+ * repository class which will be able to handle the crud operations in the layers of service implementations.
  */
 @Repository
 public interface TripBookingRepository extends JpaRepository<TripBooking, Integer> {
-	TripBooking findById(int id);
+    TripBooking findById(int id);
+ 
 
 }

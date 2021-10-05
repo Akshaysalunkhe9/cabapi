@@ -25,11 +25,13 @@ import com.codegram.cabapi.service.AdminService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 import com.codegram.cabapi.domain.Customer;
 import com.codegram.cabapi.domain.TripBooking;
+
 /**
  * 
  * @author Aniket
  *
  */
+
 @RestController
 @RequestMapping("/api/admins")
 public class AdminController {
@@ -39,6 +41,14 @@ public class AdminController {
 	
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
+	
+	
+	/**
+	 * insertAdmin
+	 * 
+	 * @param admin
+	 * @return Admin
+	 */
 	
 	@PostMapping("")
 	public ResponseEntity<?> insertNewAdmin(@Valid @RequestBody Admin admin, BindingResult result){
@@ -52,6 +62,13 @@ public class AdminController {
 		
 		}
 	
+	/**
+	 * updateAdmin
+	 * 
+	 * @param admin
+	 * @return Admin
+	 */
+
 	@PutMapping("")
 	public ResponseEntity<?> updateAdmin(@Valid @RequestBody Admin admin, BindingResult result) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -61,42 +78,120 @@ public class AdminController {
 		return new ResponseEntity<Admin>(updation, HttpStatus.OK);
 	}
 	
+	/**
+	 * deleteAdmin
+	 * 
+	 * @param adminId
+	 * @return List<Admin>
+	 */
+	
 	@DeleteMapping("/{adminId}")
 	public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
 		adminService.deleteAdmin(adminId);
 		return new ResponseEntity<String>("Admin with id: '"+adminId+"' is deleted", HttpStatus.OK);
 	}
 
+	/**
+	 * GetAdminById
+	 * 
+	 * @param adminId
+	 * @return Admin
+	 */
+	
 	@GetMapping("/{adminId}")
 	public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
 		Admin admin = adminService.viewAdminById(adminId);
 		return new ResponseEntity<Admin>(admin, HttpStatus.OK);	
 	}
+	
+	/**
+	 * GetAdminByEmail
+	 * 
+	 * @param email
+	 * @return Admin
+	 */
+	
 	@GetMapping("email/{email}")
 	public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
 		Admin admin=adminService.viewAdminDetailsByEmail(email);
 		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
 	}
 	
-	@GetMapping("/customer/{customerId}")
-		public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
-			return adminService.viewAllTripsCustomer(customerId);
-}
+	/**
+	 * GetAdminByUsername
+	 * 
+	 * @param username
+	 * @return Admin
+	 */
+	
+	@GetMapping("username/{username}")
+	public ResponseEntity<?> viewAdminDetailsByUsername(@PathVariable String username){
+		Admin admin=adminService.viewAdminDetailsByUsername(username);
+		return new ResponseEntity<Admin>(admin,HttpStatus.OK);
+	}
+	
+	/**
+	 * getTripsDatewise
+	 * 
+	 * @return List<TripBooking>
+	 */
+	
 	@GetMapping("/datewise")
 	public List<TripBooking> viewTripsDateWise(){
        return adminService.viewTripsDateWise();
 	}
+	
+	/**
+	 * getTripsCustomerwise
+	 * 
+	 * @return List<TripBooking>
+	 */
+	
 	@GetMapping("/customerwise")
 	public List<TripBooking> getTripsCustomerwise() {
 		return adminService.getTripsCustomerwise();
 	}
 	
-	@GetMapping("fordays/{customerId}/{fromDate}/{toDate}")
-	public List<TripBooking> getAllTripsForDays(@PathVariable("customerId") int customerId,
-			@PathVariable("fromDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
-			@PathVariable("toDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate)
-		 {
-		return adminService.getAllTripsForDays(customerId, fromDate, toDate);
+	/**
+	 * getAllTrips
+	 * 
+	 * @return alltrips
+	 */
+	
+	@GetMapping("/trips")
+	public ResponseEntity<?> getTotalTrips(){
+		Long operator = adminService.totalTripsTaken();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
 	}
-
+	
+	/**
+	 * getAllCustomers
+	 * 
+	 * @return allcustomers
+	 */
+	@GetMapping("/customers")
+	public ResponseEntity<?> getTotalCustomers(){
+		Long operator = adminService.totalCustomersPresent();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
+	}
+	
+	/**
+	 * getAllTrips
+	 * 
+	 * @return alltrips
+	 */
+	
+	@GetMapping("/drivers")
+	public ResponseEntity<?> getTotalDrivers(){
+		Long operator = adminService.totalDriversPresent();
+		return new ResponseEntity<Long>(operator, HttpStatus.OK);
+	}
+	
+//	@GetMapping("/income")
+//public float getTotalIncome(){
+//		float operator = adminService.totalIncome();
+//		return new ResponseEntity<Float>(admin, HttpStatus.OK);
+//		return adminService.totalIncome();
+//	}
+	
 }

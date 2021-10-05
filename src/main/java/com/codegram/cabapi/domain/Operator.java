@@ -6,12 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * This Operator Class is a domain, which represents data and it will be moving
+ * layer to layer.
  * 
  * @author anand
  *
  */
 @Entity
 public class Operator  extends AbstractUser {
+	/**
+	 * id of the opertor  and auto generated
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

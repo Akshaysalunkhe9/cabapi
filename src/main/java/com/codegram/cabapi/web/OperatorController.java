@@ -19,6 +19,11 @@ import com.codegram.cabapi.domain.Operator;
 import com.codegram.cabapi.service.MapValidationErrorService;
 import com.codegram.cabapi.service.OperatorService;
 
+/**
+ * This OperatorController and it is used for handling front end calls and generate json response. 
+ * @author Anand
+ *
+ */
 @RestController
 @RequestMapping("/api/operators")
 public class OperatorController {

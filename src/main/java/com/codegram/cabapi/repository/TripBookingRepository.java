@@ -8,8 +8,7 @@ import com.codegram.cabapi.domain.TripBooking;
 
 
 /**
- * @author Arnav
- *
+ * repository class which will be able to handle the crud operations in the layers of service implementations.
  */
 @Repository
 public interface TripBookingRepository extends JpaRepository<TripBooking, Integer> {

@@ -22,6 +22,7 @@ import com.codegram.cabapi.service.TripBookingService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
 /**
+ * This is TripBookingController and it is used for handling front end calls and generate json response. 
  * @author Arnav
  *
  */

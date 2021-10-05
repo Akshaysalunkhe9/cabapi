@@ -1,5 +1,6 @@
 package com.codegram.cabapi.serviceimpl;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,11 @@ import com.codegram.cabapi.repository.CabRepository;
 import com.codegram.cabapi.repository.DriverRepository;
 import com.codegram.cabapi.service.CabService;
 
+/**
+ * This CabServiceImpl class will implement all the methods CabService 
+ * @author Abhijit
+ *
+ */
 @Service
 public class CabServiceImpl implements CabService{
 

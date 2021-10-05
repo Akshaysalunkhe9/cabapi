@@ -22,41 +22,82 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
- * entity for trip booking
- * @author Arnav 
- *
+ * **
+ * This Tripbooking Class is a domain, which represents data and it will be moving
+ * layer to layer.
+ * @author arnav
  */
 @Entity
 public class TripBooking {
+	
+
+	/**
+	 * id of the TripBooking  and  which will be auto generated
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	/**
+	 * TripBooking table will have many to one relationship with the customer table
+	 */
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "customerId", nullable = false, updatable = false)
 	@JsonIgnore
 	private Customer customer;
 	
+	/**
+	 * TripBooking table will have many to one relationship with the Cab table
+	 */
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "cabId", nullable = false, updatable = false)
 	@JsonIgnore
+	
+	/**
+	 * TripBooking table will have many to one relationship with the Driver table
+	 */
+
 	private Cab cab;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "driverId", nullable = false, updatable = false)
 	@JsonIgnore
 	private Driver driver;
 
+	/**
+	 * The location from which the trip will be taken
+	 */
+
 	@NotBlank(message="From Location is required")
+	/**
+	 * The location upto which the trip will be delivered 
+	 */
 	private String fromLocation;
 	@NotBlank(message="From Location is required")
 	private String toLocation;
 	
+	/**
+	 * Date and time trip taken
+	 */
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
 	private LocalDateTime fromDateTime;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	
+	/**
+	 * Date and time trip taken finished
+	 */
 	private LocalDateTime toDateTime;
+	/**
+	 * Trip going on the status will be true and completed then it will be false
+	 */
 	private boolean status;
+	/**
+	 * Distance travelled in kilometers
+	 */
 	private float distanceInKm;
+	/**
+	 * Billing of the fare
+	 */
 	private float bill;
 	public TripBooking() {
 		super();

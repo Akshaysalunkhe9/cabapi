@@ -20,7 +20,11 @@ import com.codegram.cabapi.domain.Customer;
 import com.codegram.cabapi.service.CustomerService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
-
+/**
+ * This is CustomerController and it is used for handling front end calls and generate json response. 
+ * @author Akshay
+ *
+ */
 
 @RestController
 @RequestMapping("/api/customers")

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * This Project Admin is a domain, which represents data and it will be moving
+ * This Admin class is a domain, which represents data and it will be moving
  * layer to layer.
  * 
  * @author aniket
@@ -18,7 +18,7 @@ public class Admin  extends AbstractUser {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	/**
-	 * name for the project
+	 * name of the project
 	 */
 
 	public Admin() {

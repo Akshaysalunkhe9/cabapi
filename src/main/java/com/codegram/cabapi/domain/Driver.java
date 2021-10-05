@@ -1,20 +1,10 @@
 package com.codegram.cabapi.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-//import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotBlank;
 
 /**
  * This driver class will be used to register driver
@@ -24,19 +14,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Driver extends AbstractUser{
 
+	/**
+	 * Id of project and its auto generated
+	 *
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	/**
+	 * Ratings for driver
+	 */
 	private float rating;
-	private String licenseNumber;
 	
-	//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
-	//private List<Cab> cab = new ArrayList<>();
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
-	private List<TripBooking> tripBooking =  new ArrayList<>();
+	/**
+	 * License number of driver
+	 */
+	private long licenseNumber;
 	
-
+	
 	public int getId() {
 		return id;
 	}
@@ -53,35 +49,15 @@ public class Driver extends AbstractUser{
 		this.rating = rating;
 	}
 
-	public String getLicenseNumber() {
+	public long getLicenseNumber() {
 		return licenseNumber;
 	}
 
-	public void setLicenseNumber(String licenseNumber) {
+	public void setLicenseNumber(long licenseNumber) {
 		this.licenseNumber = licenseNumber;
 	}
 
 	public Driver() {
 		super();
 	}
-
-	public List<TripBooking> getTripBooking() {
-		return tripBooking;
-	}
-
-	public void setTripBooking(List<TripBooking> tripBooking) {
-		this.tripBooking = tripBooking;
-	}
-
-//	public List<Cab> getCab() {
-//		return cab;
-//	}
-//
-//	public void setCab(List<Cab> cab) {
-//		this.cab = cab;
-//	}
-	
-
-	
-	
 }

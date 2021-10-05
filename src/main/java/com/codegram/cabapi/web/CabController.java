@@ -21,6 +21,11 @@ import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.service.CabService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
+/**
+ * This is CabController and it is used for handling front end calls and generate json response. 
+ * @author Abhijit
+ *
+ */
 @RestController
 @RequestMapping("/api/cabs")
 public class CabController {

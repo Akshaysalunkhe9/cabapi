@@ -9,8 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
@@ -134,16 +133,16 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 
-		@Override
-		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-			// TODO Auto-generated method stub
-			Admin admin = adminRepository.findByEmail(email);
-			if(admin == null)
-				throw new UsernameNotFoundException("Admin not found");
-			//return new Admin(admin.getEmail(), admin.getPassword(), new ArrayList<>());
-			//return new AdminPrincipal(admin);
-			return admin;
-		}
+//		@Override
+//		public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//			// TODO Auto-generated method stub
+//			Admin admin = adminRepository.findByEmail(email);
+//			if(admin == null)
+//				throw new UsernameNotFoundException("Admin not found");
+//			//return new Admin(admin.getEmail(), admin.getPassword(), new ArrayList<>());
+//			//return new AdminPrincipal(admin);
+//			return admin;
+//		}
 
 
 }

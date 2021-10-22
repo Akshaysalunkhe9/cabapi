@@ -2,7 +2,7 @@ package com.codegram.cabapi.service;
 
 import javax.validation.Valid;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Aniket
  *
  */
-public interface AdminService extends UserDetailsService{
+public interface AdminService {
 
 	/**
 	 * This AdminService interface will hold the functionality for Admin Related Business logic

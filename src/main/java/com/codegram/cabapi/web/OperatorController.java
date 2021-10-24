@@ -56,7 +56,7 @@ public class OperatorController {
 		}
 	
 		@GetMapping("/{operatorId}")
-		public ResponseEntity<?> getAdminById(@PathVariable Integer operatorId){
+		public ResponseEntity<?> getOperatorById(@PathVariable Integer operatorId){
 			Operator operator = operatorService.viewOperatorById(operatorId);
 			return new ResponseEntity<Operator>(operator, HttpStatus.OK);
 		}

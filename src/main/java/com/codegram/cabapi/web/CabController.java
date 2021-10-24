@@ -52,7 +52,7 @@ public class CabController {
 			return new ResponseEntity<Cab>(deletecab,HttpStatus.OK);
 		}
 		@DeleteMapping("/{cabId}")
-		public ResponseEntity<?> deleteDriverById(@PathVariable int cabId){
+		public ResponseEntity<?> deleteCabById(@PathVariable int cabId){
 			cabService.deleteCab(cabId);
 			return new ResponseEntity<String>("Customer with id '"+cabId+"' has been deleted successfully.",HttpStatus.OK);
 		}
@@ -63,7 +63,7 @@ public class CabController {
 		}
 		
 		
-		@GetMapping(value = "type/{carType}")
+		@GetMapping(value = "/type/{carType}")
 		public List<Cab> viewCabsOfType(@PathVariable String carType) throws Exception {
 			return cabService.viewCabsOfType(carType);
 		}

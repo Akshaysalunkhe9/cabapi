@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
-
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.domain.TripBooking;
 
 import com.codegram.cabapi.domain.Customer;
@@ -78,6 +78,8 @@ public interface AdminService {
 	 * @param Datewise will be given
 	 * @return  TripsBooking details by the Datewise.
 	 */
+	public Iterable<Admin> findAll();
+	
 	public List<TripBooking> viewTripsDateWise();
 	
 	/**

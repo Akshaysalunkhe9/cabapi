@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codegram.cabapi.domain.Admin;
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.exception.AdminIDException;
 import com.codegram.cabapi.repository.AdminRepository;
 import com.codegram.cabapi.service.AdminService;
@@ -83,6 +84,10 @@ public class AdminServiceImpl implements AdminService {
 			return admin;
 	
    }
+		@Override
+		public Iterable<Admin> findAll() {
+			return adminRepository.findAll();
+	}
 		
 	    @Override
 		public List<TripBooking> viewTripsDateWise() {

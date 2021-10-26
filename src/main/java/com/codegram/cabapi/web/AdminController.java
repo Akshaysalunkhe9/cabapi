@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codegram.cabapi.domain.Admin;
+import com.codegram.cabapi.domain.Cab;
 import com.codegram.cabapi.service.AdminService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 import com.codegram.cabapi.domain.Customer;
@@ -70,7 +71,7 @@ public class AdminController {
 	 * @param admin
 	 * @return Admin
 	 */
-
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("")
 	public ResponseEntity<?> updateAdmin(@Valid @RequestBody Admin admin, BindingResult result) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -86,7 +87,7 @@ public class AdminController {
 	 * @param adminId
 	 * @return List<Admin>
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/{adminId}")
 	public ResponseEntity<?> deleteAdmin(@PathVariable Integer adminId) {
 		adminService.deleteAdmin(adminId);
@@ -99,7 +100,12 @@ public class AdminController {
 	 * @param adminId
 	 * @return Admin
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("")
+	public Iterable<Admin> getAllProjects(){
+		return adminService.findAll();
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/{adminId}")
 	public ResponseEntity<?> getAdminById(@PathVariable Integer adminId){
 		Admin admin = adminService.viewAdminById(adminId);
@@ -112,7 +118,7 @@ public class AdminController {
 	 * @param email
 	 * @return Admin
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("email/{email}")
 	public ResponseEntity<?> viewAdminDetailsByEmail(@PathVariable String email){
 		Admin admin=adminService.viewAdminDetailsByEmail(email);
@@ -125,7 +131,7 @@ public class AdminController {
 	 * @param username
 	 * @return Admin
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("username/{username}")
 	public ResponseEntity<?> viewAdminDetailsByUsername(@PathVariable String username){
 		Admin admin=adminService.viewAdminDetailsByUsername(username);
@@ -137,7 +143,7 @@ public class AdminController {
 	 * 
 	 * @return List<TripBooking>
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/datewise")
 	public List<TripBooking> viewTripsDateWise(){
        return adminService.viewTripsDateWise();
@@ -148,7 +154,7 @@ public class AdminController {
 	 * 
 	 * @return List<TripBooking>
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/customerwise")
 	public List<TripBooking> getTripsCustomerwise() {
 		return adminService.getTripsCustomerwise();
@@ -159,7 +165,7 @@ public class AdminController {
 	 * 
 	 * @return alltrips
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/trips")
 	public ResponseEntity<?> getTotalTrips(){
 		Long operator = adminService.totalTripsTaken();
@@ -171,6 +177,7 @@ public class AdminController {
 	 * 
 	 * @return allcustomers
 	 */
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/customers")
 	public ResponseEntity<?> getTotalCustomers(){
 		Long operator = adminService.totalCustomersPresent();
@@ -182,7 +189,7 @@ public class AdminController {
 	 * 
 	 * @return alltrips
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/drivers")
 	public ResponseEntity<?> getTotalDrivers(){
 		Long operator = adminService.totalDriversPresent();

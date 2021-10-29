@@ -87,7 +87,7 @@ public class Cab {
 		}
 
 		public void setCarType(String carType) {
-			this.carType = carType;
+			this.carType = carType.toUpperCase();
 		}
 
 		public float getPerKmRate() {

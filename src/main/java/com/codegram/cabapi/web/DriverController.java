@@ -32,7 +32,7 @@ import com.codegram.cabapi.service.DriverService;
 import com.codegram.cabapi.service.MapValidationErrorService;
 
 @RestController
-@RequestMapping("/api/driver")
+@RequestMapping("/api/drivers")
 public class DriverController {
 	@Autowired
 	private DriverService driverService;
@@ -50,6 +50,7 @@ public class DriverController {
 	}
 	
 	//List of all drivers
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/{driverId}")
 	public ResponseEntity<?> viewDriverById(@PathVariable int driverId){
 		Driver driver=driverService.viewDriverDetails(driverId);
@@ -58,6 +59,7 @@ public class DriverController {
 	
 	
 	//Get best drivers with rating > 4.5
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/bestdrivers")
 	public ResponseEntity<?> viewBestDrivers(){
 		List<Driver> bestDrivers=driverService.viewBestDrivers();
@@ -66,15 +68,18 @@ public class DriverController {
 }
 	
 	//Delete a driver based on driver id
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/{driverId}")
 	public ResponseEntity<?> deleteDriverById(@PathVariable int driverId){
 		driverService.deleteDriver(driverId);
 		return new ResponseEntity<String>("Driver with id '"+driverId+"' has been deleted successfully.",HttpStatus.OK);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/all")
 	public Iterable<Driver> getAllTrips(){
 		return driverService.findAll();
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("email/{email}")
 	public ResponseEntity<?> viewDriverDetailsByEmail(@PathVariable String email){
 		Driver driver = driverService.viewDriverDetailsByEmail(email);

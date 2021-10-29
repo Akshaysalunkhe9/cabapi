@@ -43,6 +43,7 @@ public class TripBookingController {
 		TripBooking insertTrip = tripBookingService.insertTripBooking(tripBooking, customerId, cabId, driverId);
 		return new ResponseEntity<TripBooking>(insertTrip, HttpStatus.CREATED);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("")
 	public ResponseEntity<?> updateTrip(@Valid @RequestBody TripBooking tripBooking, BindingResult result) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -51,24 +52,29 @@ public class TripBookingController {
 		TripBooking updation = tripBookingService.updateTripBooking(tripBooking);
 		return new ResponseEntity<TripBooking>(updation, HttpStatus.OK);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/{tripBookingId}")
 	public ResponseEntity<?> deleteTrip(@PathVariable Integer tripBookingId) {
 		tripBookingService.deleteTripBooking(tripBookingId);
 		return new ResponseEntity<String>("Trip with id: '"+tripBookingId+"' is deleted", HttpStatus.OK);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/all")
 	public Iterable<TripBooking> getAllTrips(){
 		return tripBookingService.findAll();
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/{tripBookingId}")
 	public ResponseEntity<?> getTripById(@PathVariable Integer tripBookingId){
 		TripBooking tripBooking = tripBookingService.viewTripById(tripBookingId);
 		return new ResponseEntity<TripBooking>(tripBooking, HttpStatus.OK);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/customer/{customerId}")
 	public List<TripBooking> viewAllTripsCustomer(@PathVariable Integer customerId){
 		return tripBookingService.viewAllTripsCustomer(customerId);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/calculate/{customerId}")
 	public float calculateBill(@PathVariable Integer customerId) {
 		return tripBookingService.calculateTotalBill(customerId);

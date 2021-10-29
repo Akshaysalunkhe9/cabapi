@@ -50,5 +50,6 @@ public interface CustomerService {
 	 * @return the customer with all the details if mail is present.
 	 */
 	public Customer viewCustomerDetailsByEmail(String email);
+	public Iterable<Customer> findAll();
 	
 }

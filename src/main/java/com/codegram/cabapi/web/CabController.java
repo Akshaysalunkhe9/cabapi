@@ -40,6 +40,7 @@ public class CabController {
 			return new ResponseEntity<Cab>(savedCab,HttpStatus.CREATED);
 		}
 	
+		@CrossOrigin(origins = "http://localhost:3000")
 		@PatchMapping("/{cabId}")
 		public ResponseEntity<?> updateCustomer(@Valid @RequestBody Cab cab , BindingResult result){
 			ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -48,23 +49,26 @@ public class CabController {
 			return new ResponseEntity<Cab>(updateCab,HttpStatus.OK);
 		}
 		
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/{cabId}")
 		public ResponseEntity<?> viewDriverById(@PathVariable int cabId){
 			Cab deletecab=cabService.viewCabDetails(cabId);
 			return new ResponseEntity<Cab>(deletecab,HttpStatus.OK);
 		}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@DeleteMapping("/{cabId}")
 		public ResponseEntity<?> deleteCabById(@PathVariable int cabId){
 			cabService.deleteCab(cabId);
 			return new ResponseEntity<String>("Customer with id '"+cabId+"' has been deleted successfully.",HttpStatus.OK);
 		}
 		
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/all")
 		public Iterable<Cab> getAllProjects(){
 			return cabService.findAll();
 		}
 		
-		
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping(value = "/type/{carType}")
 		public List<Cab> viewCabsOfType(@PathVariable String carType) throws Exception {
 			return cabService.viewCabsOfType(carType);

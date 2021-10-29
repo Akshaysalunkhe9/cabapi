@@ -43,6 +43,7 @@ public class OperatorController {
 		
 		}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("")
 	public ResponseEntity<?> updateOperator(@Valid @RequestBody Operator operator, BindingResult result) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -51,32 +52,37 @@ public class OperatorController {
 		Operator updation = operatorService.updateOperator(operator);
 		return new ResponseEntity<Operator>(updation, HttpStatus.OK);
 	}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@DeleteMapping("/{operatorId}")
 		public ResponseEntity<?> deleteOperator(@PathVariable Integer operatorId) {
 			operatorService.deleteOperator(operatorId);
 			return new ResponseEntity<String>("Operator with id: '"+operatorId+"' is deleted", HttpStatus.OK);
 		}
-	
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/{operatorId}")
 		public ResponseEntity<?> getOperatorById(@PathVariable Integer operatorId){
 			Operator operator = operatorService.viewOperatorById(operatorId);
 			return new ResponseEntity<Operator>(operator, HttpStatus.OK);
 		}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/trips")
 		public ResponseEntity<?> getTotalTrips(){
 			Long operator = operatorService.totalTripsTaken();
 			return new ResponseEntity<Long>(operator, HttpStatus.OK);
 		}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/customers")
 		public ResponseEntity<?> getTotalCustomers(){
 			Long operator = operatorService.totalCustomersPresent();
 			return new ResponseEntity<Long>(operator, HttpStatus.OK);
 		}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/drivers")
 		public ResponseEntity<?> getTotalDrivers(){
 			Long operator = operatorService.totalDriversPresent();
 			return new ResponseEntity<Long>(operator, HttpStatus.OK);
 		}
+		@CrossOrigin(origins = "http://localhost:3000")
 		@GetMapping("/cabs")
 		public ResponseEntity<?> getTotalCabs(){
 			Long operator = operatorService.totalCabsPresent();

@@ -43,6 +43,7 @@ public class CustomerController {
 		
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("")
 	public ResponseEntity<?> updateCustomer(@Valid @RequestBody Customer customer , BindingResult result){
 		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
@@ -51,18 +52,26 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(updateCustomer,HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/{customerId}")
 	public ResponseEntity<?> viewCustomerDetailsById(@PathVariable Integer customerId){
 		Customer customer=customerService.viewCustomerDetails(customerId);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("")
+	public Iterable<Customer> getAllCustomers(){
+		return customerService.findAll();
+	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("email/{email}")
 	public ResponseEntity<?> viewCustomerDetailsByEmail(@PathVariable String email){
 		Customer customer=customerService.viewCustomerDetailsByEmail(email);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/{customerId}")
 	public ResponseEntity<?> deleteCustomerById(@PathVariable Integer customerId){
 		customerService.deleteCustomer(customerId);
